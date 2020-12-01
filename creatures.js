@@ -31,11 +31,18 @@ function installData() {
   // returne(InstalCreatorsData);
 }
 function timerOfWarld() {
+
+  NascenceCreatures();
+  NascenceCreatures();
+  NascenceCreatures();
+
+  /*
 timer = setInterval(NascenceCreatures(), InstalCreatorsData[0]); // repeat InstallCreatures after t msec 
 setTimeout(() => {
   clearInterval(timer);
   console.log("End of the Warld !");
 }, InstalCreatorsData[1]); // t max - when to stop output
+*/
 }
 
 function NascenceCreatures() {
@@ -44,50 +51,25 @@ function NascenceCreatures() {
 
 function InstallCreatures() {
   console.log("Generation " + generation);
-  let type = 1;
+  let age=0,lifespan=10,parent1=0, parent2=0, type = 1;
+  let gend
+  let nameCr
   for (InstDat = 3; InstDat < 14; InstDat += 2) {
     countOfType = InstalCreatorsData[InstDat];
     countOfFam = InstalCreatorsData[InstDat + 1];
     for (CreatorOfType = 1; CreatorOfType <= countOfType; CreatorOfType++) {
-      allCreatures.push((allCreatures[id][0] = generation)); //
-      allCreatures.push((allCreatures[id][1] = id)); // № id
-      allCreatures.push(
-        // gender
-        (allCreatures[id][2] = CreatorOfType <= countOfFam ? "female" : "male")
-      );
-      allCreatures.push((allCreatures[id][3] = fname(allCreatures[id][2]))); // name
-      allCreatures.push((allCreatures[id][4] = 0)); // age
-      allCreatures.push((allCreatures[id][5] = 10)); // lifespan
-      allCreatures.push((allCreatures[id][6] = 0)); // parent 1
-      allCreatures.push((allCreatures[id][7] = 0)); // parent 2
-      switch (
-        type // type: 1,2,3,4 ;  subtype: Fire Metall Spirit WaterIce Water WaterSream)
-      ) {
-        case 1:
-          allCreatures.push((allCreatures[id][8] = type));
-          allCreatures.push((allCreatures[id][9] = "Fire"));
-          break;
-        case 2:
-          allCreatures.push((allCreatures[id][8] = type));
-          allCreatures.push((allCreatures[id][9] = "Metall"));
-          break;
-        case 3:
-          allCreatures.push((allCreatures[id][8] = type));
-          allCreatures.push((allCreatures[id][9] = "Spirit"));
-          break;
-        case 4:
-          allCreatures.push((allCreatures[id][8] = type));
-          allCreatures.push((allCreatures[id][9] = "WaterIce"));
-          break;
-        case 5:
-          allCreatures.push((allCreatures[id][8] = type - 1));
-          allCreatures.push((allCreatures[id][9] = "Water"));
-          break;
-        case 6:
-          allCreatures.push((allCreatures[id][8] = type - 2));
-          allCreatures.push((allCreatures[id][9] = "WaterSream"));
-          break;
+      gend=CreatorOfType <= countOfFam ? "female" : "male";
+      nameCr=fname(gend)
+      switch (type) { // type: 1,2,3,4 ;  subtype: Fire Metall Spirit WaterIce Water WaterSream)
+        case 1:          Type = type;          subType = "Fire";           break;
+        case 2:          Type = type;          subType = "Metall";         break;
+        case 3:          Type = type;          subType = "Spirit";         break;
+        case 4:          Type = type;          subType = "WaterIce";       break;
+        case 5:          Type = type - 1;      subType = "Water";          break;
+        case 6:          Type = type - 2;      subType = "WaterSream";     break;
       }
+      let instCr=[generation,id,gend,nameCr,age,lifespan,parent1,parent2,Type,subType];
+      allCreatures.push(instCr);   
       id++;
     }
     type++;
@@ -114,20 +96,20 @@ function tolk(Creator1,Creator2){
 console.log(dialog);
 }
 
-function mixCreatures()
-{
-  let arr=[]
-  for(i = 0; i <arr.length ; i++){
+function mixCreatures() {
+  //let arr=[]
+  console.log(allCreatures);
+  for(i = 0;  i<allCreatures[0].length ; i++){
     arr[i]=allCreatures[i][1]; // id
-	var cr1, cr1;
+  }
+	var cr1, cr2;
 	for(i = arr.length - 1; i > 0; i--){
 		j = Math.floor(Math.random()*(i + 1));
 		cr1 = arr[j];
 		arr[j] = arr[i];
-		arr[i] = cr1;
-	}
-	return arr;
-}
+    arr[i] = cr1;
+    }
+  return arr;
 }
 
 function BirthCreatures(Creator1,Creator2) {

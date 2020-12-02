@@ -13,7 +13,7 @@ timerOfWarld();
 function installData() {
   // count of              1.cycleTime  2.lifeTimeMenagerie   3.lifespan
   let InstalCreatorsData1 = [100, 400, 10];
-  // typeCreature:         4.Fire   5.FireFemale   6.Metall   7.MetallFemale   8.Spirit     9.SpiritFemale
+  // typeCreature:         4.Wood   5.WoodFemale   6.Steel   7.SteelFemale   8.Spirit     9.SpiritFemale
   let InstalCreatorsData2 = [12, 6, 12, 6, 12, 6];
   //  typeWaterCreature:   10. WaterIce   11.WaterIceFemale   12.Water   13.WaterIceFemale  14.WaterSream   15.WaterSream
   InstalCreatorsData3 = [4, 2, 4, 2, 4, 2];
@@ -53,58 +53,34 @@ function NascenceCreatures() {
 
 function InstallCreatures() {
   console.log("Generation " + generation);
-  let age = 0,
+  let gend = "",
+    nameCr = "",
+    age = 0,
     lifespan = 10,
     parent1 = 0,
-    parent2 = 0,
-    type = 1;
-  let gend;
-  let nameCr;
+    parent2 = 0;
+  var type = 1,
+    subType = "",
+    mood = "";
   for (InstDat = 3; InstDat < 14; InstDat += 2) {
     countOfType = InstalCreatorsData[InstDat];
     countOfFam = InstalCreatorsData[InstDat + 1];
     for (CreatorOfType = 1; CreatorOfType <= countOfType; CreatorOfType++) {
       gend = CreatorOfType <= countOfFam ? "female" : "male";
       nameCr = fname(gend);
-      switch (
-        type // type: 1,2,3,4 ;  subtype: Fire Metall Spirit WaterIce Water WaterSream)
-      ) {
-        case 1:
-          Type = type;
-          subType = "fire";
-          break;
-        case 2:
-          Type = type;
-          subType = "metall";
-          break;
-        case 3:
-          Type = type;
-          subType = "spirit";
-          break;
-        case 4:
-          Type = type;
-          subType = "waterIce";
-          break;
-        case 5:
-          Type = type - 1;
-          subType = "water";
-          break;
-        case 6:
-          Type = type - 2;
-          subType = "waterSream";
-          break;
-      }
+      switchTypeSubTypeMood(type);
       let instCr = [
-        generation,
-        id,
-        gend,
-        nameCr,
-        age,
-        lifespan,
-        parent1,
-        parent2,
-        Type,
-        subType,
+        generation, // 0
+        id, // 1
+        gend, // 2
+        nameCr, // 3
+        age, // 4
+        lifespan, // 5
+        parent1, // 6
+        parent2, // 7
+        Type, // 8
+        subType, // 9
+        mood, // 10
       ];
       console.log(instCr);
       allCreatures.push(instCr);
@@ -119,11 +95,8 @@ function InstallCreatures() {
 function meeting() {
   let arr = mixCreatures();
   for (i = 0; i < arr.length; i = i + 2) {
-    tolk(arr[i], arr[i + 1]);
-    if (allCreatures[arr[i]][8] == allCreatures[arr[i+1]][8]) {
-      // if types equal
-      allCreatures[arr[i]][5]++; //lifespan +1
-      allCreatures[arr[i + 1]][5]++; //lifespan +1
+    meetingtolk(arr[i], arr[i + 1]);
+    lifespanFunc(arr[i], arr[i + 1]);
       if (
         allCreatures[arr[i]][8] > 2 &&
         allCreatures[arr[i + 1]][8] > 2 &&
@@ -133,11 +106,10 @@ function meeting() {
       }
     }
   }
-}
 
-function tolk(Creator1, Creator2) {
-  let hi1 = (allCreatures[Creator1][2] =="male")?"Mr. ": "Miss ";
-  let hi2 = (allCreatures[Creator2][2] =="male")?"Mr. ": "Miss ";
+function meetingtolk(Creator1, Creator2) {
+  let hi1 = allCreatures[Creator1][2] == "male" ? "Mr. " : "Miss ";
+  let hi2 = allCreatures[Creator2][2] == "male" ? "Mr. " : "Miss ";
   let dialog =
     "-Hello " +
     hi2 +
@@ -152,8 +124,31 @@ function tolk(Creator1, Creator2) {
   console.log(dialog);
 }
 
+function lifespanFunc (Creator1, Creator2){
+    // 1-Wood 2-Steel 3-Spirit 4-Water  ;  41+ 12-  23+- 24-  31+  43- (1+ after die - 14 not++)
+    coupleType=toString(allCreatures[Creator1][8])+toString(allCreatures[Creator2][8]);
+    let lifespan1=0,lifespan2=0;
+    switch(coupleType){ // if types equal:
+    case "14": lifespan2++;break;
+    case "41": lifespan1++;break;
+    case "12":lifespan1--;break;
+    case "21":lifespan2--;break;
+    case "23":lifespan1++;lifespan2--;break;
+    case "32":lifespan1--;lifespan2++;break;
+    case "24":lifespan1--;break;
+    case "42":lifespan2--;break;
+    case "31":lifespan1++;break;
+    case "13":lifespan2++;break;
+    case "43":lifespan1--;break;
+    case "34":lifespan2--;break;
+    }
+    allCreatures[Creator1][5]+=lifespan1; //lifespan +1/0/-1
+    allCreatures[Creator2][5]+=lifespan2; //lifespan +1/0/-1
+  }
+
 function mixCreatures() {
   let arr = [allCreatures.length];
+  let i, j;
   //console.log(allCreatures);
   for (i = 0; i < allCreatures[0].length; i++) {
     arr[i] = allCreatures[i][1]; // id
@@ -180,16 +175,34 @@ function BirthCreatures(Creator1, Creator2) {
   let nameCr;
   gend = CreatorOfType <= countOfFam ? "female" : "male";
   nameCr = fname(gend);
+  switchTypeSubTypeMood(type);
+  let instCr = [
+    generation,
+    id,
+    gend,
+    nameCr,
+    lifespan,
+    parent1,
+    parent2,
+    Type,
+    subType,
+    mood
+  ];
+  console.log(instCr);
+  allCreatures.push(instCr);
+}
+
+function switchTypeSubTypeMood(type) {
   switch (
-    type // type: 1,2,3,4 ;  subtype: Fire Metall Spirit WaterIce Water WaterSream)
+    type // type: 1,2,3,4 ;  subtype: Wood Steel Spirit WaterIce Water WaterSream)
   ) {
     case 1:
       Type = type;
-      subType = "fire";
-      break;
+      subType = "wood"; 
+      break;            
     case 2:
       Type = type;
-      subType = "metall";
+      subType = "steel";
       break;
     case 3:
       Type = type;
@@ -208,20 +221,43 @@ function BirthCreatures(Creator1, Creator2) {
       subType = "waterSream";
       break;
   }
-  let instCr = [
-    generation,
-    id,
-    gend,
-    nameCr,
-    age,
-    lifespan,
-    parent1,
-    parent2,
-    Type,
-    subType,
-  ];
-  console.log(instCr);
-  allCreatures.push(instCr);
+
+  switch (
+    rnd(3, -1) // mood
+  ) {
+    case 1:
+      mood = smile();
+      break;
+    case 2:
+      mood = cry();
+      break;
+    case 3:
+      mood = talk();
+      break;
+  }
+}
+
+function smile(Creator) {
+  return "Ж:-D";
+}
+function cry(Creator) {}
+{
+  return "Ж:'(";
+}
+function talk(Creator) {
+  return "Ж:-O  bla-bla-bla";
+}
+
+function death() {
+  for (let i = allCreatures[0].length - 1; i >= 0; i--) {
+    if (allCreatures[i][5] - allCreatures[i][4] <= 0) {
+      if(allCreatures[i][8]==1){// if type=wood then 50% --> BirthCreatures
+        if (rnd(2,-1)==1) BirthCreatures(allCreatures[i][1], allCreatures[i][1]);
+      } 
+      allCreatures[i] = allCreatures[allCreatures[0].length - 1];
+      allCreatures.pop();
+      }
+  }
 }
 
 function fname(gender) {

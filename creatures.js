@@ -2,8 +2,11 @@ console.log("Big Bang !!!");
 
 let InstalCreatorsData = [];
 let allCreatures = []; // array for menagerie creatures
-generation = 0; // for 1-st generation
+var generation = 0; // for 1-st generation
 var id = 0; // counter of creatur
+var type = 1,
+  subType = "",
+  mood = "";
 installData();
 
 timerOfWarld();
@@ -44,6 +47,7 @@ setTimeout(() => {
 }
 
 function NascenceCreatures() {
+  console.log("generation "+generation);
   if (generation == 0) {
     InstallCreatures();
   } else {
@@ -59,9 +63,6 @@ function InstallCreatures() {
     lifespan = 10,
     parent1 = 0,
     parent2 = 0;
-  var type = 1,
-    subType = "",
-    mood = "";
   for (InstDat = 3; InstDat < 14; InstDat += 2) {
     countOfType = InstalCreatorsData[InstDat];
     countOfFam = InstalCreatorsData[InstDat + 1];
@@ -97,15 +98,15 @@ function meeting() {
   for (i = 0; i < arr.length; i = i + 2) {
     meetingtolk(arr[i], arr[i + 1]);
     lifespanFunc(arr[i], arr[i + 1]);
-      if (
-        allCreatures[arr[i]][8] > 2 &&
-        allCreatures[arr[i + 1]][8] > 2 &&
-        allCreatures[arr[i]][2] != allCreatures[arr[i + 1]][2]
-      ) {
-        BirthCreatures(arr[i], arr[i + 1]);
-      }
+    if (
+      allCreatures[arr[i]][8] > 2 &&
+      allCreatures[arr[i + 1]][8] > 2 &&
+      allCreatures[arr[i]][2] != allCreatures[arr[i + 1]][2]
+    ) {
+      BirthCreatures(arr[i], arr[i + 1]);
     }
   }
+}
 
 function meetingtolk(Creator1, Creator2) {
   let hi1 = allCreatures[Creator1][2] == "male" ? "Mr. " : "Miss ";
@@ -124,33 +125,62 @@ function meetingtolk(Creator1, Creator2) {
   console.log(dialog);
 }
 
-function lifespanFunc (Creator1, Creator2){
-    // 1-Wood 2-Steel 3-Spirit 4-Water  ;  41+ 12-  23+- 24-  31+  43- (1+ after die - 14 not++)
-    coupleType=toString(allCreatures[Creator1][8])+toString(allCreatures[Creator2][8]);
-    let lifespan1=0,lifespan2=0;
-    switch(coupleType){ // if types equal:
-    case "14": lifespan2++;break;
-    case "41": lifespan1++;break;
-    case "12":lifespan1--;break;
-    case "21":lifespan2--;break;
-    case "23":lifespan1++;lifespan2--;break;
-    case "32":lifespan1--;lifespan2++;break;
-    case "24":lifespan1--;break;
-    case "42":lifespan2--;break;
-    case "31":lifespan1++;break;
-    case "13":lifespan2++;break;
-    case "43":lifespan1--;break;
-    case "34":lifespan2--;break;
-    }
-    allCreatures[Creator1][5]+=lifespan1; //lifespan +1/0/-1
-    allCreatures[Creator2][5]+=lifespan2; //lifespan +1/0/-1
+function lifespanFunc(Creator1, Creator2) {
+  // 1-Wood 2-Steel 3-Spirit 4-Water  ;  41+ 12-  23+- 24-  31+  43- (1+ after die - 14 not++)
+  coupleType =
+    toString(allCreatures[Creator1][8]) + toString(allCreatures[Creator2][8]);
+  let lifespan1 = 0,
+    lifespan2 = 0;
+  switch (
+    coupleType // if types equal:
+  ) {
+    case "14":
+      lifespan2++;
+      break;
+    case "41":
+      lifespan1++;
+      break;
+    case "12":
+      lifespan1--;
+      break;
+    case "21":
+      lifespan2--;
+      break;
+    case "23":
+      lifespan1++;
+      lifespan2--;
+      break;
+    case "32":
+      lifespan1--;
+      lifespan2++;
+      break;
+    case "24":
+      lifespan1--;
+      break;
+    case "42":
+      lifespan2--;
+      break;
+    case "31":
+      lifespan1++;
+      break;
+    case "13":
+      lifespan2++;
+      break;
+    case "43":
+      lifespan1--;
+      break;
+    case "34":
+      lifespan2--;
+      break;
   }
+  allCreatures[Creator1][5] += lifespan1; //lifespan +1/0/-1
+  allCreatures[Creator2][5] += lifespan2; //lifespan +1/0/-1
+}
 
 function mixCreatures() {
-  let arr = [allCreatures.length];
+  let arr =[];
   let i, j;
-  //console.log(allCreatures);
-  for (i = 0; i < allCreatures[0].length; i++) {
+  for (i = 0; i < allCreatures.length; i++) {
     arr[i] = allCreatures[i][1]; // id
   }
   var cr1, cr2;
@@ -186,7 +216,7 @@ function BirthCreatures(Creator1, Creator2) {
     parent2,
     Type,
     subType,
-    mood
+    mood,
   ];
   console.log(instCr);
   allCreatures.push(instCr);
@@ -198,8 +228,8 @@ function switchTypeSubTypeMood(type) {
   ) {
     case 1:
       Type = type;
-      subType = "wood"; 
-      break;            
+      subType = "wood";
+      break;
     case 2:
       Type = type;
       subType = "steel";
@@ -223,70 +253,72 @@ function switchTypeSubTypeMood(type) {
   }
 
   switch (
-    rnd(3, -1) // mood
+    rnd(3, 0) // mood
   ) {
     case 1:
-      mood = smile();
+      mood = talk();
       break;
     case 2:
-      mood = cry();
+      mood = smile();
       break;
     case 3:
-      mood = talk();
+      mood = cry();
       break;
   }
 }
 
 function smile(Creator) {
-  return "Ж:-D";
+  return "Ж:-D  Ha-ha!";
 }
-function cry(Creator) {}
-{
-  return "Ж:'(";
+function cry(Creator) {
+  return "Ж:'(  wee-wee.. ";
 }
 function talk(Creator) {
-  return "Ж:-O  bla-bla-bla";
+  return "Ж:-O  bla-bla";
 }
 
 function death() {
   for (let i = allCreatures[0].length - 1; i >= 0; i--) {
     if (allCreatures[i][5] - allCreatures[i][4] <= 0) {
-      if(allCreatures[i][8]==1){// if type=wood then 50% --> BirthCreatures
-        if (rnd(2,-1)==1) BirthCreatures(allCreatures[i][1], allCreatures[i][1]);
-      } 
+      if (allCreatures[i][8] == 1) {
+        // if type=wood then 50% --> BirthCreatures
+        if (rnd(2, -1) == 1)
+          BirthCreatures(allCreatures[i][1], allCreatures[i][1]);
+      }
       allCreatures[i] = allCreatures[allCreatures[0].length - 1];
       allCreatures.pop();
-      }
+    }
   }
 }
 
 function fname(gender) {
   // come up with a name
   consonants = [
-    `ц`,
-    `к`,
-    `н`,
-    `г`,
-    `ш`,
-    `щ`,
-    `з`,
-    `х`,
-    `ф`,
-    `в`,
-    `п`,
-    `р`,
-    `л`,
-    `д`,
-    `ж`,
-    `ч`,
-    `м`,
-    `т`,
-    `б`,
+    `q`,
+    `w`,
+    `r`,
+    `t`,
+    `n`,
+    `m`,
+    `p`,
+    `s`,
+    `d`,
+    `f`,
+    `g`,
+    `h`,
+    `j`,
+    `k`,
+    `l`,
+    `z`,
+    `x`,
+    `c`,
+    `v`,
+    `b`,
   ];
   consonantsLen = consonants.length; // agree / array value
-  vowels = ["у", "е", "а", "о", "я", "и", "э", "ю"];
+  vowels = ["e", "y", "u", "o", "a"];
   vowelsLen = vowels.length; //vowel / array value
-  femEndingNames = ["ая", "ия", "уя", "а", "я"];
+  femEndingNames = ["y", "a", "e"];
   femEndNamesLen = femEndingNames.length; // end female names / array value
   nameLen = rnd(10, 1); //name length from 2 to 11 letters
   nameCreature = ""; // empty name
@@ -295,18 +327,22 @@ function fname(gender) {
   } else {
     vowelСonsonantSwitch = 1;
   }
+  let letter = "";
   for (letterName = 0; letterName < nameLen; letterName++) {
     // choose the ending of the female/male name depends of gender
     if (vowelСonsonantSwitch == -1) {
       // first choise - random female ending of name, else - random vowel
       if (letterName == 0) {
-        nameCreature = femEndingNames[rnd(femEndNamesLen, -1)];
+        letter = femEndingNames[rnd(femEndNamesLen, -1)];
       } else {
-        nameCreature = vowels[rnd(vowelsLen, -1)] + nameCreature;
+        letter = vowels[rnd(vowelsLen, -1)];
       }
     } else {
-      nameCreature = consonants[rnd(consonantsLen, -1)] + nameCreature;
+      letter = consonants[rnd(consonantsLen, -1)];
     }
+    // add letter first or other
+    if (letterName == nameLen - 1) letter=letter.toUpperCase();
+        nameCreature =letter + nameCreature;
     vowelСonsonantSwitch = -vowelСonsonantSwitch;
   }
   return nameCreature;
@@ -316,9 +352,6 @@ function rnd(a, b) {
   // random element of the array
   return Math.ceil(Math.random() * a + b);
 }
-
-//-----------------------------------------------------
-
 //-----------------------------------------------------
 /*    class meeting {}    class tolk{}     class birth{}     class death{}   */
 

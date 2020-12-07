@@ -11,8 +11,8 @@ installData();
 timerOfWarld();
 
 function installData() {
-  // count of              1.cycleTime  2.lifeTimeMenagerie   3.lifespan
-  let InstalCreatorsData1 = [3000, 300000, 10];
+  // count of              1.cycleTime (minutes)  2.lifeTimeMenagerie  (minutes)  3.lifespan
+  let InstalCreatorsData1 = [0.1, 20, 10];
   // typeCreature:         4.Wood   5.WoodFemale   6.Steel   7.SteelFemale   8.Spirit     9.SpiritFemale
   let InstalCreatorsData2 = [12, 6, 12, 6, 12, 6];
   //  typeWaterCreature:   10. WaterIce   11.WaterIceFemale   12.Water   13.WaterIceFemale  14.WaterSream   15.WaterSream
@@ -29,19 +29,18 @@ function installData() {
   );
 }
 function timerOfWarld() {
-  switch (1) {
-    case 1:
+  if (InstalCreatorsData[0]==0) { // if time-interval==0 
       for (nc = 1; nc < 10000000; nc++) {
         NascenceCreatures();
       }
-      break;
-    default:
-      let timer = setInterval(() => NascenceCreatures(), InstalCreatorsData[0]); // repeat InstallCreatures after t msec
+    }
+      else {
+      let timer = setInterval(() => NascenceCreatures(), InstalCreatorsData[0]*60*1000); // repeat InstallCreatures after t (minutes)
       setTimeout(() => {
         clearInterval(timer);
         console.log("End of the Warld !");
-      }, InstalCreatorsData[1]); // t max - when to stop output
-      break;
+      }, InstalCreatorsData[1]*60*1000); // t max (minutes) - when to stop output
+    
   }
 }
 
@@ -156,13 +155,7 @@ function statistic() {
     stat0[3] = 0;
     doStat = 1;
   }
-  if (
-    (generation % 5 == 0 && generation <= 20) ||
-    generation % 10 == 0 ||
-    doStat == 1
-  ) {
-    logstat(s);
-  }
+  if (generation % 5 == 0 || doStat == 1) logstat(s);
 }
 
 function logstat(s) {

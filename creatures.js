@@ -2,14 +2,13 @@ console.log("Big Bang !!!");
 
 let InstalCreatorsData = [];
 let allCreatures = []; // array for menagerie creatures
-let stat0=[1,1,1,1,1,1]; // array-label for nullified array of statistic
+let stat0 = [1, 1, 1, 1, 1, 1]; // array-label for nullified array of statistic
 var generation = 0; // for 1-st generation
 var id = 0; // counter of creatur
 var nType = 1,
   Type;
 installData();
 timerOfWarld();
-// console.log("Big Bang !!!");
 
 function installData() {
   // count of              1.cycleTime  2.lifeTimeMenagerie   3.lifespan
@@ -28,18 +27,22 @@ function installData() {
     InstalCreatorsData3,
     [sum]
   );
-  // returne(InstalCreatorsData);
 }
 function timerOfWarld() {
-  /*
-  for (nc = 1; nc < 10000000; nc++) {
-    NascenceCreatures();
-  } 
- /* */
-let timer = setInterval(()=>NascenceCreatures(), InstalCreatorsData[0]); // repeat InstallCreatures after t msec 
-setTimeout(() => {clearInterval(timer);console.log("End of the Warld !");
-}, InstalCreatorsData[1]); // t max - when to stop output
-
+  switch (1) {
+    case 1:
+      for (nc = 1; nc < 10000000; nc++) {
+        NascenceCreatures();
+      }
+      break;
+    default:
+      let timer = setInterval(() => NascenceCreatures(), InstalCreatorsData[0]); // repeat InstallCreatures after t msec
+      setTimeout(() => {
+        clearInterval(timer);
+        console.log("End of the Warld !");
+      }, InstalCreatorsData[1]); // t max - when to stop output
+      break;
+  }
 }
 
 function NascenceCreatures() {
@@ -136,74 +139,91 @@ function statistic() {
         break;
     }
   }
-  doStat=0 // Label for nullified array of statistic
-  if (stat0[0]==1 && s[2]==0){stat0[0]=0; doStat=1}
-  if (stat0[1]==1 && s[5]==0){stat0[1]=0; doStat=1} 
-  if (stat0[2]==1 && s[8]==0){stat0[2]=0; doStat=1}
-  if (stat0[3]==1 && s[11]==0){stat0[3]=0; doStat=1}  
-  if ((generation%5==0 && generation<=20)||(generation%10==0)||doStat==1)
-  {logstat(s)};
+  doStat = 0; // Label for nullified array of statistic
+  if (stat0[0] == 1 && s[2] == 0) {
+    stat0[0] = 0;
+    doStat = 1;
+  }
+  if (stat0[1] == 1 && s[5] == 0) {
+    stat0[1] = 0;
+    doStat = 1;
+  }
+  if (stat0[2] == 1 && s[8] == 0) {
+    stat0[2] = 0;
+    doStat = 1;
+  }
+  if (stat0[3] == 1 && s[11] == 0) {
+    stat0[3] = 0;
+    doStat = 1;
+  }
+  if (
+    (generation % 5 == 0 && generation <= 20) ||
+    generation % 10 == 0 ||
+    doStat == 1
+  ) {
+    logstat(s);
+  }
 }
 
-function logstat(s){
-console.log(
-  "All-" +
-    allCreatures.length +
-    " f-" +
-    s[0] +
-    "/m-" +
-    s[1] +
-    "\n" +
-    "Wood-" +
-    s[2] +
-    " f-" +
-    s[3] +
-    "/m-" +
-    s[4] +
-    "\n" +
-    "Steel-" +
-    s[5] +
-    " f-" +
-    s[6] +
-    "/m-" +
-    s[7] +
-    "\n" +
-    "Spirit-" +
-    s[8] +
-    " f-" +
-    s[9] +
-    "/m-" +
-    s[10] +
-    "\n" +
-    "Water-" +
-    s[11] +
-    " f-" +
-    s[12] +
-    "/m-" +
-    s[13] +
-    "\n" +
-    "waterIce-" +
-    s[14] +
-    " f-" +
-    s[15] +
-    "/m-" +
-    s[16] +
-    "\n" +
-    "water-" +
-    s[17] +
-    " f-" +
-    s[18] +
-    "/m-" +
-    s[19] +
-    "\n" +
-    "WaterSream-" +
-    s[20] +
-    " f-" +
-    s[21] +
-    "/m-" +
-    s[22] +
-    "\n"
-)
+function logstat(s) {
+  console.log(
+    "All-" +
+      allCreatures.length +
+      " f-" +
+      s[0] +
+      "/m-" +
+      s[1] +
+      "\n" +
+      "Wood-" +
+      s[2] +
+      " f-" +
+      s[3] +
+      "/m-" +
+      s[4] +
+      "\n" +
+      "Steel-" +
+      s[5] +
+      " f-" +
+      s[6] +
+      "/m-" +
+      s[7] +
+      "\n" +
+      "Spirit-" +
+      s[8] +
+      " f-" +
+      s[9] +
+      "/m-" +
+      s[10] +
+      "\n" +
+      "Water-" +
+      s[11] +
+      " f-" +
+      s[12] +
+      "/m-" +
+      s[13] +
+      "\n" +
+      "waterIce-" +
+      s[14] +
+      " f-" +
+      s[15] +
+      "/m-" +
+      s[16] +
+      "\n" +
+      "water-" +
+      s[17] +
+      " f-" +
+      s[18] +
+      "/m-" +
+      s[19] +
+      "\n" +
+      "WaterSream-" +
+      s[20] +
+      " f-" +
+      s[21] +
+      "/m-" +
+      s[22] +
+      "\n"
+  );
 }
 function InstallCreatures() {
   let gend = "",
@@ -545,21 +565,3 @@ function rnd(a, b) {
   // random element of the array
   return Math.ceil(Math.random() * a + b);
 }
-//-----------------------------------------------------
-/*    class meeting {}    class tolk{}     class birth{}     class death{}   */
-
-function Entity(N, name_, age, lifespan, gender, prnt1, prnt2, type) {
-  // creature constructor
-  this.N = Entity.N;
-  this.name_ = Entity.name_;
-  this.age = Entity.age;
-  this.lifespan = lifespan;
-  this.gender = gender;
-  this.prnt1 = prnt1;
-  this.prnt2 = prnt2;
-  this.type = nType;
-}
-
-//function filling(n1) { // функция
-//   var all=new Entity  }
-/*  tolk{}  laugh{}   cry{}   childbirth{}    death{}    } // console.log('Creatures simulator ended') */

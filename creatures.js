@@ -2,20 +2,18 @@ console.log("Big Bang !!!");
 
 let InstalCreatorsData = [];
 let allCreatures = []; // array for menagerie creatures
+let stat0=[1,1,1,1,1,1]; // array-label for nullified array of statistic
 var generation = 0; // for 1-st generation
 var id = 0; // counter of creatur
-var type = 1,
-  subType = "",
-  mood = "";
+var nType = 1,
+  Type;
 installData();
-
 timerOfWarld();
-
-// InstallCreatures();
+// console.log("Big Bang !!!");
 
 function installData() {
   // count of              1.cycleTime  2.lifeTimeMenagerie   3.lifespan
-  let InstalCreatorsData1 = [100, 400, 10];
+  let InstalCreatorsData1 = [3000, 300000, 10];
   // typeCreature:         4.Wood   5.WoodFemale   6.Steel   7.SteelFemale   8.Spirit     9.SpiritFemale
   let InstalCreatorsData2 = [12, 6, 12, 6, 12, 6];
   //  typeWaterCreature:   10. WaterIce   11.WaterIceFemale   12.Water   13.WaterIceFemale  14.WaterSream   15.WaterSream
@@ -33,33 +31,184 @@ function installData() {
   // returne(InstalCreatorsData);
 }
 function timerOfWarld() {
-  NascenceCreatures();
-  NascenceCreatures();
-  NascenceCreatures();
-
   /*
-timer = setInterval(NascenceCreatures(), InstalCreatorsData[0]); // repeat InstallCreatures after t msec 
-setTimeout(() => {
-  clearInterval(timer);
-  console.log("End of the Warld !");
+  for (nc = 1; nc < 10000000; nc++) {
+    NascenceCreatures();
+  } 
+ /* */
+let timer = setInterval(()=>NascenceCreatures(), InstalCreatorsData[0]); // repeat InstallCreatures after t msec 
+setTimeout(() => {clearInterval(timer);console.log("End of the Warld !");
 }, InstalCreatorsData[1]); // t max - when to stop output
-*/
+
 }
 
 function NascenceCreatures() {
-  console.log("generation "+generation);
   if (generation == 0) {
     InstallCreatures();
   } else {
     meeting();
   }
+  console.log("Generation " + generation);
+  statistic();
+  generation++;
 }
 
+function statistic() {
+  let s = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  for (let i = 0; i < allCreatures.length; i++) {
+    if (allCreatures[i][2] == "female") {
+      s[0]++;
+    } else {
+      s[1]++;
+    }
+    switch (allCreatures[i][8]) {
+      case 1:
+        {
+          s[2]++;
+          if (allCreatures[i][2] == "female") {
+            s[3]++;
+          } else {
+            s[4]++;
+          }
+        }
+        break;
+      case 2:
+        {
+          s[5]++;
+          if (allCreatures[i][2] == "female") {
+            s[6]++;
+          } else {
+            s[7]++;
+          }
+        }
+        break;
+      case 3:
+        {
+          s[8]++;
+          if (allCreatures[i][2] == "female") {
+            s[9]++;
+          } else {
+            s[10]++;
+          }
+        }
+        break;
+      case 4:
+        {
+          s[11]++;
+          if (allCreatures[i][2] == "female") {
+            s[12]++;
+          } else {
+            s[13]++;
+          }
+          switch (allCreatures[i][9]) {
+            case "waterIce":
+              {
+                s[14]++;
+                if (allCreatures[i][2] == "female") {
+                  s[15]++;
+                } else {
+                  s[16]++;
+                }
+              }
+              break;
+            case "water":
+              {
+                s[17]++;
+                if (allCreatures[i][2] == "female") {
+                  s[18]++;
+                } else {
+                  s[19]++;
+                }
+              }
+              break;
+            case "waterSream":
+              {
+                s[20]++;
+                if (allCreatures[i][2] == "female") {
+                  s[21]++;
+                } else {
+                  s[22]++;
+                }
+              }
+              break;
+          }
+        }
+        break;
+    }
+  }
+  doStat=0 // Label for nullified array of statistic
+  if (stat0[0]==1 && s[2]==0){stat0[0]=0; doStat=1}
+  if (stat0[1]==1 && s[5]==0){stat0[1]=0; doStat=1} 
+  if (stat0[2]==1 && s[8]==0){stat0[2]=0; doStat=1}
+  if (stat0[3]==1 && s[11]==0){stat0[3]=0; doStat=1}  
+  if ((generation%5==0 && generation<=20)||(generation%10==0)||doStat==1)
+  {logstat(s)};
+}
+
+function logstat(s){
+console.log(
+  "All-" +
+    allCreatures.length +
+    " f-" +
+    s[0] +
+    "/m-" +
+    s[1] +
+    "\n" +
+    "Wood-" +
+    s[2] +
+    " f-" +
+    s[3] +
+    "/m-" +
+    s[4] +
+    "\n" +
+    "Steel-" +
+    s[5] +
+    " f-" +
+    s[6] +
+    "/m-" +
+    s[7] +
+    "\n" +
+    "Spirit-" +
+    s[8] +
+    " f-" +
+    s[9] +
+    "/m-" +
+    s[10] +
+    "\n" +
+    "Water-" +
+    s[11] +
+    " f-" +
+    s[12] +
+    "/m-" +
+    s[13] +
+    "\n" +
+    "waterIce-" +
+    s[14] +
+    " f-" +
+    s[15] +
+    "/m-" +
+    s[16] +
+    "\n" +
+    "water-" +
+    s[17] +
+    " f-" +
+    s[18] +
+    "/m-" +
+    s[19] +
+    "\n" +
+    "WaterSream-" +
+    s[20] +
+    " f-" +
+    s[21] +
+    "/m-" +
+    s[22] +
+    "\n"
+)
+}
 function InstallCreatures() {
-  console.log("Generation " + generation);
   let gend = "",
     nameCr = "",
-    age = 0,
+    age = 1,
     lifespan = 10,
     parent1 = 0,
     parent2 = 0;
@@ -69,7 +218,9 @@ function InstallCreatures() {
     for (CreatorOfType = 1; CreatorOfType <= countOfType; CreatorOfType++) {
       gend = CreatorOfType <= countOfFam ? "female" : "male";
       nameCr = fname(gend);
-      switchTypeSubTypeMood(type);
+      subType = install_TypeSubType(nType);
+      mood = switchMood();
+      numInBase = 0;
       let instCr = [
         generation, // 0
         id, // 1
@@ -82,33 +233,59 @@ function InstallCreatures() {
         Type, // 8
         subType, // 9
         mood, // 10
+        numInBase, //11 - empty cell for now
       ];
-      console.log(instCr);
+      //   console.log(instCr);
       allCreatures.push(instCr);
       id++;
     }
-    type++;
+    nType++;
   }
-  generation++;
   id--;
 }
 
 function meeting() {
   let arr = mixCreatures();
   for (i = 0; i < arr.length; i = i + 2) {
+    if (i == arr.length - 1) continue; // check for the existence of the interlocutor
     meetingtolk(arr[i], arr[i + 1]);
     lifespanFunc(arr[i], arr[i + 1]);
-    if (
-      allCreatures[arr[i]][8] > 2 &&
-      allCreatures[arr[i + 1]][8] > 2 &&
-      allCreatures[arr[i]][2] != allCreatures[arr[i + 1]][2]
-    ) {
-      BirthCreatures(arr[i], arr[i + 1]);
+    CheckBirth(arr[i], arr[i + 1]); // Check the possibility of birth
+  }
+  death();
+}
+
+function CheckBirth(Creator1, Creator2) {
+  let if1 =
+    allCreatures[Creator1][4] > 2 && // if age >2
+    allCreatures[Creator2][4] > 2 && // and gender not equal
+    allCreatures[Creator1][2] != allCreatures[Creator2][2];
+  if (if1) {
+    let type1 = allCreatures[Creator1][8],
+      type2 = allCreatures[Creator2][8];
+    let if2 = type1 == type2; // types of creatures is equal
+    if (if2) {
+      nType = type1 == 4 ? 4 + rnd(3, -1) : type1; // 4-water? (random Ice/Water/Sream) else easy type
+      BirthCreatures(Creator1, Creator2, nType);
+    } // "Same rase!"
+    else {
+      let st1 = allCreatures[(Creator1, 9)], //subType 1 creature
+        st2 = allCreatures[(Creator2, 9)]; //subType 2 creature
+      if3 =
+        (st1 == "spirit" && st2 == "waterSream") ||
+        (st2 == "spirit" && st1 == "waterSream"); //if "Half-breed!"
+      if (if3) {
+        // Rase-probability 50/50 "spirit" / "water"
+        nType = rnd(2, -1) == 1 ? 3 : 4 + rnd(3, -1); // 3 -spirit / 4-water (random Ice/Water/Sream)
+      }
+      BirthCreatures(Creator1, Creator2, nType);
     }
   }
 }
 
 function meetingtolk(Creator1, Creator2) {
+  allCreatures[Creator1][10] = switchMood(); // mood changes when thay meet
+  allCreatures[Creator2][10] = switchMood();
   let hi1 = allCreatures[Creator1][2] == "male" ? "Mr. " : "Miss ";
   let hi2 = allCreatures[Creator2][2] == "male" ? "Mr. " : "Miss ";
   let dialog =
@@ -122,7 +299,7 @@ function meetingtolk(Creator1, Creator2) {
     allCreatures[Creator1][3] +
     "-" +
     allCreatures[Creator1][9];
-  console.log(dialog);
+  //!  console.log(dialog);
 }
 
 function lifespanFunc(Creator1, Creator2) {
@@ -178,12 +355,13 @@ function lifespanFunc(Creator1, Creator2) {
 }
 
 function mixCreatures() {
-  let arr =[];
+  let arr = [];
   let i, j;
   for (i = 0; i < allCreatures.length; i++) {
-    arr[i] = allCreatures[i][1]; // id
+    allCreatures[i][11] = i; // primary number in turn
+    arr[i] = allCreatures[i][11]; // fix this indexes to array intermediate
   }
-  var cr1, cr2;
+  var cr1;
   for (i = arr.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
     cr1 = arr[j];
@@ -193,65 +371,69 @@ function mixCreatures() {
   return arr;
 }
 
-function BirthCreatures(Creator1, Creator2) {
-  console.log("Ua-Ua-Ua!");
+function BirthCreatures(Creator1, Creator2, nType) {
+  //! console.log("!!! is Born !!!");
   id++;
-  let age = 0,
+  let gend = rnd(2, 0) == 1 ? "female" : "male",
+    nameCr = fname(gend),
+    age = 0,
     lifespan = 10,
     parent1 = Creator1,
     parent2 = Creator2,
-    type = 1;
-  let gend;
-  let nameCr;
-  gend = CreatorOfType <= countOfFam ? "female" : "male";
-  nameCr = fname(gend);
-  switchTypeSubTypeMood(type);
+    subType = install_TypeSubType(nType);
+  mood = switchMood();
   let instCr = [
-    generation,
-    id,
-    gend,
-    nameCr,
-    lifespan,
-    parent1,
-    parent2,
-    Type,
-    subType,
-    mood,
+    generation, // 0
+    id, // 1
+    gend, // 2
+    nameCr, // 3
+    age, // 4
+    lifespan, // 5
+    parent1, // 6
+    parent2, // 7
+    Type, // 8
+    subType, // 9
+    mood, // 10
+    numInBase, //11
   ];
-  console.log(instCr);
+  //!  console.log(instCr);
   allCreatures.push(instCr);
 }
 
-function switchTypeSubTypeMood(type) {
+function install_TypeSubType(nType) {
+  let subType;
   switch (
-    type // type: 1,2,3,4 ;  subtype: Wood Steel Spirit WaterIce Water WaterSream)
+    nType // type: 1,2,3,4 ;  subtype: Wood Steel Spirit WaterIce Water WaterSream)
   ) {
     case 1:
-      Type = type;
+      Type = nType;
       subType = "wood";
       break;
     case 2:
-      Type = type;
+      Type = nType;
       subType = "steel";
       break;
     case 3:
-      Type = type;
+      Type = nType;
       subType = "spirit";
       break;
     case 4:
-      Type = type;
+      Type = nType;
       subType = "waterIce";
       break;
     case 5:
-      Type = type - 1;
+      Type = nType - 1;
       subType = "water";
       break;
     case 6:
-      Type = type - 2;
+      Type = nType - 2;
       subType = "waterSream";
       break;
   }
-
+  return subType;
+}
+function switchMood() {
+  let mood;
   switch (
     rnd(3, 0) // mood
   ) {
@@ -265,6 +447,7 @@ function switchTypeSubTypeMood(type) {
       mood = cry();
       break;
   }
+  return mood;
 }
 
 function smile(Creator) {
@@ -278,14 +461,24 @@ function talk(Creator) {
 }
 
 function death() {
-  for (let i = allCreatures[0].length - 1; i >= 0; i--) {
+  for (let i = allCreatures.length - 1; i >= 0; i--) {
+    allCreatures[i][4]++; //  age growth
+    let a1 = allCreatures[i][5],
+      a2 = allCreatures[i][4];
+
     if (allCreatures[i][5] - allCreatures[i][4] <= 0) {
+      //! console.log("death " + allCreatures[i][1] + " / " + allCreatures.length);
       if (allCreatures[i][8] == 1) {
         // if type=wood then 50% --> BirthCreatures
         if (rnd(2, -1) == 1)
-          BirthCreatures(allCreatures[i][1], allCreatures[i][1]);
+          // probability 50/50 - with death of wood - borning wood.
+          BirthCreatures(
+            allCreatures[i][1],
+            allCreatures[i][1],
+            allCreatures[i][8]
+          ); // Same rase
       }
-      allCreatures[i] = allCreatures[allCreatures[0].length - 1];
+      allCreatures[i] = allCreatures[allCreatures.length - 1];
       allCreatures.pop();
     }
   }
@@ -341,8 +534,8 @@ function fname(gender) {
       letter = consonants[rnd(consonantsLen, -1)];
     }
     // add letter first or other
-    if (letterName == nameLen - 1) letter=letter.toUpperCase();
-        nameCreature =letter + nameCreature;
+    if (letterName == nameLen - 1) letter = letter.toUpperCase();
+    nameCreature = letter + nameCreature;
     vowelСonsonantSwitch = -vowelСonsonantSwitch;
   }
   return nameCreature;
@@ -364,7 +557,7 @@ function Entity(N, name_, age, lifespan, gender, prnt1, prnt2, type) {
   this.gender = gender;
   this.prnt1 = prnt1;
   this.prnt2 = prnt2;
-  this.type = type;
+  this.type = nType;
 }
 
 //function filling(n1) { // функция

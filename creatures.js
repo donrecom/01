@@ -1,44 +1,44 @@
-/*  About program:
-Программа для любознательных юнатов, природолюбов и гринписовцев
-! Запустив файл creatures.js , вы запускаете модель жизни зверинца!
-Зверинец включает в себя 4 видов существ:  
-1-Деревянные, 2-Стальные, 3-Духовные, 4-Водяные.
-Водяные (4 тип) существа бывают в 3-х состояниях (подтипах): 
-Лед, Вода, Пар, которые хаотически изменяются каждый цикл.
-Существа бывают мужского и женского пола. 
-? Исходные данные можно ввести в "function initialData()" (редактировать значения разрешено)
-? InstalCreatorsData1 = [ 1.cycleTime (minutes),  2.lifeTimeMenagerie (minutes), 3.lifespan]
-? InstalCreatorsData2 = [ 4.Wood,  5.WoodFemale,  6.Steel, 7.SteelFemale, 8.Spirit, 9.SpiritFemale ]
-? InstalCreatorsData3 = [ 10. WaterIce  11.WaterIceFemale, 12.Water, 13.WaterIceFemale, 14.WaterSream, 15.WaterSream];    
-Вводим соответственно изначальное количество существ каждого типа, подтипа (для Воды) и женских особей. 
-Мужские автоматически определятся из разницы общего и женских.
-У каждого существа при рождении , соответственно, мужское или женское имя.
-Продолжительность жизни (Долголетие) каждого по умолчанию 10 лет(циклов или поколений). 
-При рождении существу 0 лет.
-Существа могут ":-D" - смеяться, ":-(" - плакать , ":-о" - болтать.
-Эти их состояния могут меняться при встрече. Парные встречи происходят одна в цикл 
-для каждого существа (последний нечетный может остаться без пары)
-При встрече существа здороваются, называя друг друга по имени.
-Eсли встречаются Дерево(1), Сталь(2), Дух(3) и Вода(4)в любом состоянии :
-1) Дерево(1) и Вода(4), долголетие Воды возрастает (+1) 
-   Долголетие Дерева в этом случае не меняет для баланса сил.
-2) Дерево(1) и Сталь(2), долголетие Дерева убывает (-1)
-3) Сталь(2) и Вода(2), долголетие Стали убывает (-1)
-4) Дух(3) и Дерево(1),долголетие Духа возрастает (+1)
-5) Дух(3) и Вода(4), долголетие Воды убывает (-1)
-Каждый цикл возраст существ ростет на единицу (+1)
-По прошествии такого цикла, на котором возраст существа достиг
-значения продолжительности жизни (долголетия), существо "умирает" (стирается).
-При смерти Дерева(1), с вероятностью 50% рождается новое дерево от умирающего.
-При встрече однотипных разнополых особей достигших 3-хлетнего возраста (совершеннолетия) 
-у них рождается "ребенок". В той же ситуации, но тип одного - Дух, другого 
-Водяной Пар - рождается с вероятностю 50/50 Дух или Вода(в любом состоянии). 
+/**   About program:
+This is a program for curious young people, nature lovers and Greenpeace people!
+! By running the creatures.js file, you start the menagerie's life model!
+The menagerie includes 4 types of creatures:
+1-Wooden, 2-Steel, 3-Spiritual, 4-Water.
+Water (type 4) creatures are in 3 states (subtypes):
+Ice, Water, Steam, which change chaotically every cycle.
+Creatures are male and female.
+? Initial data can be entered in "function initialData ()" (edit values ​​are allowed)
+? InstalCreatorsData1 = [1.cycleTime (minutes), 2.lifeTimeMenagerie (minutes), 3.lifespan]
+? InstalCreatorsData2 = [4.Wood, 5.WoodFemale, 6.Steel, 7.SteelFemale, 8.Spirit, 9.SpiritFemale]
+? InstalCreatorsData3 = [10. WaterIce 11.WaterIceFemale, 12.Water, 13.WaterIceFemale, 14.WaterSream, 15.WaterSream];
+We enter, respectively, the initial number of creatures of each type, subtype (for Water) and females.
+The male is automatically determined from the difference between the general and the female.
+Each creature has a male or female name at birth, respectively.
+The default lifespan (Longevity) of each is 10 years (cycles or generations).
+At birth, the creature is 0 years old.
+Creatures can ":-D" - laugh, ":-(" - cry, ": -o" - chat.
+These states can change when they meet. Paired meetings take place one per cycle
+for each creature (the last odd one can be left without a pair)
+When they meet, the creatures greet each other, calling each other by name.
+If Wood (1), Steel (2), Spirit (3) and Water (4) are encountered in any state:
+1) Wood (1) and Water (4), Water longevity increases (+1)
+   The Longevity of the Tree in this case does not change for the balance of power.
+2) Wood (1) and Steel (2), Wood longevity decreases (-1)
+3) Steel (2) and Water (2), Steel longevity decreases (-1)
+4) Spirit (3) and Wood (1), Spirit's longevity increases (+1)
+5) Spirit (3) and Water (4), the longevity of Water decreases (-1)
+Each cycle the age of creatures grows by one (+1)
+After such a cycle, in which the age of the creature reached
+life expectancy values ​​(longevity), the creature "dies" (erased).
+When a Tree dies (1), with a 50% chance a new tree is born from the dying one.
+When meeting of the same type of heterosexual individuals who have reached 3 years of age (adulthood)
+they have a "child". In the same situation, but the type of one is Spirit, the other
+Water Vapor - is born with a 50/50 probability of Spirit or Water (in any condition).
 */
 
-// ! 1. initialData()                    (after declare global counters)
+/** ! 1. initialData()                    (after declare global counters) */
 function initialData() {
   // count of              1.cycleTime (minutes) (if "0" -> without delay) 2.lifeTimeMenagerie  (minutes)  3.lifespan
-  let InstalCreatorsData1 = [0, 20, 10];
+  let InstalCreatorsData1 = [0, 1, 10];
   // typeCreature:         4.Wood   5.WoodFemale   6.Steel   7.SteelFemale   8.Spirit     9.SpiritFemale
   let InstalCreatorsData2 = [12, 6, 12, 6, 12, 6];
   //  typeWaterCreature:   10. WaterIce   11.WaterIceFemale   12.Water   13.WaterIceFemale  14.WaterSream   15.WaterSream
@@ -332,7 +332,7 @@ function InstallCreatures() {
 function descriptionCreature(instCr = Array(12)) {
   let txt = `A ${instCr[9]}-${instCr[2]} ${instCr[3]} was born in generation ${instCr[0]}. `;
   txt1 = instCr[2] == "female" ? "She" : "Hi";
-  txt += `${txt1} was № ${instCr[1]} of all.  ${txt1} said: ${instCr[10]}`;
+  txt += `${txt1} was № ${instCr[1]} of all. Now their ${allCreatures.length}.  ${txt1} said: ${instCr[10]}`;
   console.log(txt);
 }
 
@@ -426,9 +426,9 @@ function DialogWrite(Creator = Array(2)) {
 // ! 11.  lifespanFunc(Creator=Array(2))
 function lifespanFunc(Creator = Array(2)) {
   // 1-Wood 2-Steel 3-Spirit 4-Water  ;  4+1 1-2  2+3- 2-4  3+1  4-3 (1st can give birth  after die -> 1st havn't  "+")
-  let coupleType =
-    toString(allCreatures[Creator[0]][8]) +
-    toString(allCreatures[Creator[1]][8]); // give combination of types
+let coupleType =
+    String(allCreatures[Creator[0]][8]) +
+    String(allCreatures[Creator[1]][8]); // give combination of types
   let lifespan = [0, 0]; // label for increase/decrease of creature1 & creature2 lifespan
   switch (
     coupleType // if the types of interlocutors make up any of the combinations, // then the life span of the specified creature will change
@@ -499,9 +499,6 @@ function lifespanFunc(Creator = Array(2)) {
   }
   allCreatures[Creator[0]][5] += lifespan[0]; //lifespan +1/0/-1
   allCreatures[Creator[1]][5] += lifespan[1]; //lifespan +1/0/-1
-
-  DeathСheck(Creator[0]); // todo>   check whether the time to die)    --> Look 21.DeathСheck(i)
-  DeathСheck(Creator[1]);
 }
 
 // ! 12. CheckBirth(Creator=Array(2))
@@ -536,14 +533,15 @@ function checkBirth(Creator = Array(2)) {
 
 // ! 13 BirthCreatures(nType, Creator=Array(2))
 function BirthCreatures(nType, Creator = Array(2)) {
-  // parents name-type for logs :
-  let parent = [
+  
+  let parent = [// parents name-type for logs :
     allCreatures[Creator[0]][3] + "-" + allCreatures[Creator[0]][9],
     allCreatures[Creator[1]][3] + "-" + allCreatures[Creator[1]][9],
   ];
-  if (LogSwitch[4] != "")
+  // declaration of love, if dialogues are included and parents are different (not a tree)
+  if (LogSwitch[4] != ""&&allCreatures[Creator[0]][1]!=allCreatures[Creator[0]][1])
     console.log(`${parent[0]}: - I love you! 
-                 ${parent[1]}: - I love you too! `);
+${parent[1]}: - I love you too! `);
   id++;
   let gend = rnd(2, 0) == 1 ? "female" : "male",
     nameCr = Namer(gend), // todo>  Make a name: ending - depending on gender    --> Look 14. Namer(gender)
@@ -728,11 +726,7 @@ function DeathСheck(i) {
       // if dying type==wood
       if (rnd(2, -1) == 1) {
         // then 50% probability - with death of wood -> borning wood.
-        BirthCreatures(
-          // todo>   Birth --> Look 13. BirthCreatures(Parent1, Parent1, nType=1/wood/)
-          allCreatures[i][8], // Same rase
-          [allCreatures[i][1], allCreatures[i][1]]
-        );
+        BirthCreatures(allCreatures[i][8], [i, i]); // Same rase // todo>   Birth --> Look 13. BirthCreatures(Parent1, Parent1, nType=1/wood/)
       }
     }
     allCreatures[i] = allCreatures[allCreatures.length - 1]; // rewrote the last creature in the array to the place of the deceased,
@@ -740,7 +734,8 @@ function DeathСheck(i) {
   }
 }
 
-//! rnd(a, b)  -  a random number from a given number with a shift of the initial element
+//! 23. rnd(a, b)  -  a random number from a given number with a shift of the initial element
 function rnd(a, b) {
   return Math.ceil(Math.random() * a + b); //  rnd(3,-1) --> choice from 0 , 1 , 2 ;  rnd(4,2) --> choice from 3 , 4 , 5, 6
 }
+

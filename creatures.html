@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html onclick="document.writeln('<br/><br/><br/><br/><br/><br/>Обработчик для Div сработал!<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>')">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Зверинец</title>
+  </head>
+  <body class="background1"> 
+    <script src="./creatures.js"></script>
+    <form>
+
+      <style type="text/css">
+        .div1 {
+         border: 1px solid rgb(122, 146, 226); /* Параметры рамки */
+         padding: 5px; /* Поля вокруг текста */
+         margin-bottom: 5px; /* Отступ снизу */
+        }
+        #left { text-align: left; }
+        .center { text-align: center; }
+        .button1 {
+   background: -moz-linear-gradient(#D0ECF4, #010b0e, #D0ECF4);
+   background: -webkit-gradient(linear, 0 0, 0  100%, from(#D0ECF4), to(#D0ECF4), color-stop(0.5, #5BC9E1));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+   padding: 3px 7px;
+   color: #333;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 5px;
+   border: 1px solid #666;
+   height:40px;
+   width:306px;
+  font-size:20px;
+  }
+  .background1 {
+    background: #599ac0 url(./creatures.jpg);/* Background color and file path */
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Modern browsers */; 
+    color: rgb(0, 0, 0); /* Text color */
+    font-style:oblique; font-size: 18px;
+    max-width: 320px;
+    
+   }
+       </style>
+       <div class="div1">
+        <br><label><b>Введите параметры зверинца</b></label><br><br>
+        <input id='0' class="center" name="cycleTimeMinutes"  type="number" min="0" max="9999" value="0.0001"/> <label> Скорость, лет за минуту </label><br>
+        <input id='1' class="center" name="lifeTimeMenagerieMinutes" type="number"  min="0" max="9999" value="1000"/><label> Жизнь зверинца, минут</label><br>
+        <input id='2'class="center"  name="lifespanCreature"  type="number"  min="0" max="9999"  value="10" /><label>Срок жизни существ,лет</label><br>
+        <br><label> Существ в начале : </label><br>
+        <input id='3'class="center"  name="Woods"  type="number"  min="0" max="9999" value="12"/><label> Деревянных</label><br>
+        <input id='4'class="center"  name="WoodFem"  type="number"  min="0" max="9999"  value="6"/><label> из них женских</label><br>
+        <br>
+        <input id='5'class="center"  name="Steels" type="number"  min="0" max="9999" value="12"/><label> Стальных</label><br>
+        <input id='6'class="center"  name="SteelFem" type="number"  min="0" max="9999" value="6"/><label> из них женских</label><br>
+        <br>
+        <input id='7'class="center"  name="Spirits"  type="number"  min="0" max="9999" value="12"/><label> Духовных</label><br>
+       <input id='8'class="center"  name="SpiritFem"  type="number"  min="0" max="9999" value="6"/><label> из них женских</label><br>
+        <br>
+        <label>Существ из рода воды :</label><br>
+        <input id='9'class="center"  name="WaterIce"  type="number"  min="0" max="9999" value="4"/><label> Ледяных</label><br>
+        <input id='10'class="center"  name="WaterIceFem"  type="number"  min="0" max="9999" value="2"/><label> из них женских</label><br>
+        <br>
+        <input id='11'class="center"  name="WaterLiquid"  type="number"  min="0" max="9999" value="4"/><label> Жидких </label><br>
+        <input id='12'class="center"  name="WaterLiquidFem"  type="number"  min="0" max="9999" value="2"/><label> из них женских</label><br>
+        <br>
+        <input id='13'class="center"  name="WaterSream"  type="number"  min="0" max="9999" value="4"/><label> Парообразных</label><br>
+        <input id='14'class="center"  name="WaterSreamFem"  type="number"  min="0" max="9999" value="2"/><label> из них женских</label><br>
+      </div>     
+  <div class="div1">
+   <label><b>Статистика</b></label><br>    
+    <input id='16'class="center"  name="Generation"  type="checkbox"   checked="checked"/><label> Показать год (цикл)</label><br>
+    <input id='17'class="center"  name="statisticForYear"  type="checkbox"   checked="checked"/><label> Годовая статистика</label><br>
+    <input id='18'class="center"  name="StatEvery5genOrZeroing"  type="checkbox"><label> статистика раз в 5 циклов</label><br>
+    <input id='19'class="center"  name="ParametersNewCreature"  type="checkbox"   checked="checked"/><label> парам.нов.существ</label><br>
+    <input id='20'class="center"  name="Dialogs"  type="checkbox"   checked="checked"/><label> диалоги</label><br>
+    <input id='21'class="center"  name="typeWhoBorn"  type="checkbox"   checked="checked"/><label> тип рожденных</label><br>
+    <input id='22'class="center"  name="detaleWhoBorn"  type="checkbox"   checked="checked"/><label> подробнее о рожденных</label><br>
+    <input id='23'class="center"  name="typeWhoDiedAge"  type="checkbox"   checked="checked"/><label> умершие</label><br>
+</div>
+    </form>
+  
+    <div id="divDialog"><button class="button1" onclick="
+timerOfWarld(
+      document.getElementsByName('cycleTimeMinutes')[0].value , document.getElementsByName('lifeTimeMenagerieMinutes')[0].value,
+      document.getElementsByName('lifespanCreature')[0].value,  document.getElementsByName('Woods')[0].value,
+      document.getElementsByName('WoodFem')[0].value,  document.getElementsByName('Steels')[0].value,
+      document.getElementsByName('SteelFem')[0].value,  document.getElementsByName('Spirits')[0].value,
+      document.getElementsByName('SpiritFem')[0].value,  document.getElementsByName('WaterIce')[0].value,
+      document.getElementsByName('WaterIceFem')[0].value, document.getElementsByName('WaterLiquid')[0].value,
+      document.getElementsByName('WaterLiquidFem')[0].value, document.getElementsByName('WaterSream')[0].value,
+      document.getElementsByName('WaterSreamFem')[0].value, document.getElementById(`16`).checked,
+      document.getElementById(`17`).checked,document.getElementById(`18`).checked,
+      document.getElementById(`19`).checked,document.getElementById(`20`).checked,
+      document.getElementById(`21`).checked,document.getElementById(`22`).checked,
+      document.getElementById(`23`).checked
+)">Пуск !</button>
+</div>
+</body>
+</html>

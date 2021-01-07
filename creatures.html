@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html onclick="document.writeln('<br/><br/><br/><br/><br/><br/>Обработчик для Div сработал!<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>')">
+<html onclick=pause()>
   <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -45,7 +45,7 @@
        </style>
        <div class="div1">
         <br><label><b>Введите параметры зверинца</b></label><br><br>
-        <input id='0' class="center" name="cycleTimeMinutes"  type="number" min="0" max="9999" value="0.0001"/> <label> Скорость, лет за минуту </label><br>
+        <input id='0' class="center" name="cycleTimeMinutes"  type="number" min="0" max="9999" value="0.1"/> <label> Скорость, лет за минуту </label><br>
         <input id='1' class="center" name="lifeTimeMenagerieMinutes" type="number"  min="0" max="9999" value="1000"/><label> Жизнь зверинца, минут</label><br>
         <input id='2'class="center"  name="lifespanCreature"  type="number"  min="0" max="9999"  value="10" /><label>Срок жизни существ,лет</label><br>
         <br><label> Существ в начале : </label><br>

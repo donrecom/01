@@ -38,7 +38,7 @@ Water Vapor - is born with a 50/50 probability of Spirit or Water (in any condit
   var  labelZeroingType = { wood: 1, steel: 1, spirit: 1, water: 1 }; // array-label for nullified tipes
   var  generation = 0; // for 1-st generation
   var  id = 0; // counter of creatur
-  var pause_=-1;
+  var pause_=1;
 
 // ! 3. timerOfWarld()
 function timerOfWarld(cycleTimeMinutes, lifeTimeMenagerieMinutes,lifespanCreature,Woods,WoodFem,Steels,SteelFem,Spirits,
@@ -90,6 +90,9 @@ function timerOfWarld(cycleTimeMinutes, lifeTimeMenagerieMinutes,lifespanCreatur
         WaterSream: WaterSream,
         WaterSreamFem: WaterSreamFem,
       }
+      let childP=document.getElementsByTagName("button")[0]
+      childP.parentNode.removeChild(childP)
+
       Log("Большой взрыв !!!","boom"); // "Big Bang !!!"
   // todo>   the time of civilization flows here, the cycle time and the life time of the menagerie are set until the End of the World
   let extinction = " !!! Произошло вымирание цивилизации !"; // " !!! There was an extinction of civilization !"
@@ -106,7 +109,7 @@ function timerOfWarld(cycleTimeMinutes, lifeTimeMenagerieMinutes,lifespanCreatur
 
   setTimeout(() => {
     clearInterval(timer); // and set the End of the World
-    Log(`Время цивилизации существ вышло ! (${InstalCreaturesData.lifeTimeMenagerieMinutes} мин)`,"timeover"); // "End of the Warld !"
+    Log(`Время цивилизации существ вышло ! (${InstalCreaturesData.lifeTimeMenagerieMinutes} мин)`,"extinction"); // "End of the Warld !"
   },  InstalCreaturesData.lifeTimeMenagerieMinutes* 60 * 1000); // lifeTimeMenagerie (minutes) - when to stop output
 }
 
@@ -687,12 +690,9 @@ ${parent[1]}: - I love you too! `*/
     if (LogSwitch.typeWhoBorn != false)
       // todo>    Created a description of the creature
       Log(
-        subType +
-          ", с днем рождения !!! Счастливые родители " +
-          parent[0] +
-          " и " +
-          parent[1]
-      ,"born"); // " is Born !!! happy parents " " and " //  show subType who was born
+        `${subType}, с днем рождения !!! 
+        Счастливые родители ${parent[0]} и ${parent[1]}`
+      ,"Born"); // " is Born !!! happy parents " " and " //  show subType who was born
     if (LogSwitch.detaleWhoBorn != false)
       descriptionCreature(allCreatures[allCreatures.length - 1]); // display the parameters of the new creature / if LogSwitch !=""
   }

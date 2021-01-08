@@ -130,7 +130,8 @@ p.className=clName
 p.innerHTML=txt
 document.body.append(p);
  // document.createElement(`<p>${txt}<br></p>`);
-window.scrollBy(100000, 1000000)};
+window.scrollBy(100000, 1000000);
+}
 }
 
 
@@ -533,42 +534,42 @@ function lifespanFunc(Creature = Array(2)) {
   switch (
     coupleType // if the types of interlocutors make up any of the combinations, // then the life span of the specified creature will change
   ) {
-    case "14":
+    case "ДеревоВода":
       lifespan[1]++;
       break;
-    case "41":
+    case "ВодаДерево":
       lifespan[0]++;
       break;
-    case "12":
+    case "ДеревоСталь":
       lifespan[0]--;
       break;
-    case "21":
+    case "СтальДерево":
       lifespan[1]--;
       break;
-    case "23":
+    case "СтальДух":
       lifespan[0]++;
       lifespan[1]--;
       break;
-    case "32":
+    case "ДухСталь":
       lifespan[0]--;
       lifespan[1]++;
       break;
-    case "24":
+    case "СтальВода":
       lifespan[0]--;
       break;
-    case "42":
+    case "ВодаСталь":
       lifespan[1]--;
       break;
-    case "31":
+    case "ДухДерево":
       lifespan[0]++;
       break;
-    case "13":
+    case "ДеревоДух":
       lifespan[1]++;
       break;
-    case "43":
+    case "ВодаДух":
       lifespan[0]--;
       break;
-    case "34":
+    case "ДухВода":
       lifespan[1]--;
       break;
   }
@@ -582,16 +583,15 @@ function lifespanFunc(Creature = Array(2)) {
             allCreatures[Creature[companion]].name +
             allCreatures[Creature[companion]].subType,
           Name2 =
-            allCreatures[Creature[companion2]].name +
-            allCreatures[Creature[companion2]].subType;
+            allCreatures[Creature[companion1]].name +
+            allCreatures[Creature[companion1]].subType;
         switch (lifespan[companion]) {
           case 1:
             allCreatures[Creature[companion]].mood = smile(); // the creature feels better, it smiles
             dialog = Name1 + ": Очень хорошо с тобой," + Name2 + "!  " + smile(); // ":Very good with you,"
             if (
               allCreatures[Creature[companion]].lifespan -
-                allCreatures[Creature[companion]].age ==
-              1
+                allCreatures[Creature[companion]].age == 1
             )
               dialog = dialog + " Мое воскрешение произошло благодаря тебе!"; // " You raised me!"
             break;
@@ -862,5 +862,5 @@ function chbox() {
   document.getElementById(`${i}`).checked = v; }
 
   function pause() {
-    pause_=-pause_
+   if (generation!=0) pause_=-pause_
   }

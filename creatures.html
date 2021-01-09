@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html onclick="pause()">
+<html onclick="pause()" ondblclick="stop1=1">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -34,6 +34,13 @@
 3) Сталь (2) и Вода (2) - Долговечность стали уменьшается (-1)
 4) Дух (3) и Дерево (1) - продолжительность жизни Духа увеличивается (+1)
 5) Дух (3) и Вода (4) - долговечность Воды уменьшается (-1)`,
+`Настроение собеседников также влияет на их долголетие. Радостные Ж:-D , горюющие Ж:-( , или болтающие Ж:-О , 
+для сочетаний настроений собеседников покажем влияние на долголетие:
+Так если встретились   
+  Ж:-D +   Ж:-D +   |    Ж:-< -   Ж:-< - 
+  Ж:-< +   Ж:-O -    |    Ж:-D -   Ж:-O +  
+  Ж:-(  -    Ж:-D       |
+  Долголетие от Настроений собеседников изменяется `,
 `Каждый цикл возраст существ увеличивается на единицу (+1)
 После такого цикла, в котором возраст существа достиг
 значения его продолжительности жизни, существо «умирает» (стирается).
@@ -77,9 +84,10 @@ Water Vapor - is born with a 50/50 probability of Spirit or Water (in any condit
 The log displays statistics on the population in the current year, communication dialogues of the creatures encountered, their mood, birth and death.
 When you click on any place in the browser, the output of the log to the browser is suspended until the next click, but the "life" of the menagerie continues and can be viewed in the console.
 */
+//begin();
 
       // ! 2.  BEGIN of the Program
-
+//function begin(){
       var InstalCreaturesData = {}; // todo>   We declare global counters and data arrays :
       var LogSwitch = {}; // tags for logging
       var allCreatures = []; // array for menagerie creatures
@@ -87,7 +95,8 @@ When you click on any place in the browser, the output of the log to the browser
       var generation = 0; // for 1-st generation
       var id = 0; // counter of creatur
       var pause_ = 1;
-
+      var stop1=0; // global timer marker for menagerie life cycles
+//}
       // ! 3. timerOfWarld()
       function timerOfWarld(
         cycleTimeMinutes,
@@ -162,22 +171,26 @@ When you click on any place in the browser, the output of the log to the browser
           plusMood:plusMood,
           minusMood:minusMood
         };
-        let childP = document.getElementsByTagName("button")[0];
-        childP.parentNode.removeChild(childP);
+        // Unvisible the Start button (to avoid pressing the)
+        let childP = document.getElementsByTagName("button")[2].style.display = 'none'; 
+        //childP.parentNode.removeChild(childP);
 
         Log("Большой взрыв !!!", "boom"); // "Big Bang !!!"
         // todo>   the time of civilization flows here, the cycle time and the life time of the menagerie are set until the End of the World
-        let extinction = " !!! Произошло вымирание цивилизации !"; // " !!! There was an extinction of civilization !"
+
 
         //  turn on the cycle timer
         let timer = setInterval(() => {
           newYear(InstalCreaturesData);
-          if (allCreatures.length <= 0) {
-            Log(extinction, "extinction");
+          if (stop1==1||allCreatures.length <= 0) {
+            let extinction;
+             if (stop1==1){extinction = " !!! Конец Света по воле Твоей !"}else 
+             {extinction =" !!! Произошло вымирание цивилизации !" };
+            Log(extinction, "extinction");// " !!! There was an extinction of civilization !"
             clearInterval(timer);
-           reload1();
+            reload1();
           // process.exit(0);
-          }
+          };
         }, InstalCreaturesData.cycleTimeMinutes * 60 * 1000); // repeat newYear after "cycleTime" minutes
 
         setTimeout(() => {
@@ -189,17 +202,35 @@ When you click on any place in the browser, the output of the log to the browser
 
       // ! 3.0 Menagerie reset button 
       function reload1(){
-          let b = document.createElement("button");
-          b.className ="button1" ;
-          b.innerHTML = "Перезагрузить зверинец";
-          b.id="26";
-          b.onclick =window.location.reload;
-          document.body.append(b);
+        let b = document.getElementsByTagName("button")[0];
+         b.className ="button3" ;
+        document.body.append(b); // move to the end
           window.scrollBy(100000, 1000000);
       }
 
+      // ! 3.1 Menagerie reset button 
+      function reload2(){
+        let b = document.getElementsByTagName("button")[2];
+         b.className ="button2" ;
+        document.body.prepend(b); // move to the Home
+        let childP = document.getElementsByTagName("button")[2].style.display = 'block'; 
+        //childP = document.getElementsByTagName("p").removeChild
+        Array.prototype.slice.call(document.getElementsByTagName('p')).forEach(function(item) {
+    item.remove();// or item.parentNode.removeChild(item) for older browsers
+});
+//begin(); //
+InstalCreaturesData = {}; // todo>   We declare global counters and data arrays :
+LogSwitch = {}; // tags for logging
+allCreatures = []; // array for menagerie creatures
+labelZeroingType = { wood: 1, steel: 1, spirit: 1, water: 1 }; // array-label for nullified tipes
+generation = 0; // for 1-st generation
+id = 0; // counter of creatur
+pause_ = 1;
+stop1=0;
+      //window.location.reload()
+      }
 
-      // ! 3.1 we write magazine
+      // ! 3.2 we write magazine
       function Log(txt, clName) {
         console.log(txt.replace("<br/>","\n"));
         if (pause_ == 1||txt.indexOf("Написание приостановлено")>-1) {
@@ -678,6 +709,7 @@ WaterSream-${statistic.waterSream} f-${statistic.waterSreamFem}/m-${statistic.wa
         itaration = 0;
         Creatures.forEach((Number) => {
           // meeting history text :
+          let speak=(allCreatures[Number].gender=='женщина')?', она сказала: "':', кто говорил: ';
           history =
             history +
             allCreatures[Number].gender +
@@ -688,9 +720,9 @@ WaterSream-${statistic.waterSream} f-${statistic.waterSreamFem}/m-${statistic.wa
             ", чей возраст " +
             allCreatures[Number].age +
             years(allCreatures[Number].age) +
-            ', кто говорил: " ' +
+            speak +
             allCreatures[Number].mood +
-            '" '; // ' y.o., who say: " '
+            ' '; // ' y.o., who say: " '
           if (itaration < Creatures.length - 1) history = history + "<br/>и "; // "\nand "  //  -  add "and" only on the first iteration
           itaration++;
         });
@@ -714,9 +746,7 @@ WaterSream-${statistic.waterSream} f-${statistic.waterSreamFem}/m-${statistic.wa
           NewSmile2 = allCreatures[Creature[1]].mood;
         let dialog =
           // creature1:-Hello "Mr./Miss"  "name creature2" - "subType creature2" ,  creature2: ... greets too
-          ` ${NameSubType1}: -Привет ${hi2} ${NameSubType2}! ${NewSmile1}
-          
- ${NameSubType2}: -Приветствую ${hi1} ${NameSubType1}! ${NewSmile2}`; // -Hello
+          `   ${NameSubType1}:<br/>-Привет ${hi2} ${NameSubType2}! ${NewSmile1}<br/><br/>   ${NameSubType2}:<br/>-Приветствую ${hi1} ${NameSubType1}! ${NewSmile2}`; // -Hello
         Log(dialog, "dialog"); // write meeting dialog
       }
 
@@ -729,12 +759,12 @@ WaterSream-${statistic.waterSream} f-${statistic.waterSreamFem}/m-${statistic.wa
           s1 = "0";
           s2 = str1;
         } else {
-          s2 = str1.charAt(sL - 2);
+          s1 = str1.charAt(sL - 2);
           s2 = str1.charAt(sL - 1);
         }
         if (s2 == "1" && s1 != "1") {
           years0 = " год ";
-        } else if ((s2 == "2" || s2 == "3" || s2 == "4") && s1 != "1") {
+        } else if ( s1 != "1" &&(s2 == "2" || s2 == "3" || s2 == "4") ) {
           years0 = " года ";
         } else {
           years0 = " лет ";
@@ -791,10 +821,11 @@ WaterSream-${statistic.waterSream} f-${statistic.waterSreamFem}/m-${statistic.wa
             lifespan[1]--;
             break;
         }
-/* let coupleMood =
+        
+ let coupleMood =
           String(allCreatures[Creature[0]].mood).slice(-1) +
           String(allCreatures[Creature[1]].mood).slice(-1); // mood of interlocutors
-          let x=InstalCreaturesData.minusMood, y=InstalCreaturesData.plusMood; //decrease and increase in life expectancy from the mood of the interlocutor
+          let  y=Number(InstalCreaturesData.plusMood), x=Number(InstalCreaturesData.minusMood); //decrease and increase in life expectancy from the mood of the interlocutor
           switch (
             coupleMood) {
               case "((":
@@ -828,7 +859,7 @@ WaterSream-${statistic.waterSream} f-${statistic.waterSreamFem}/m-${statistic.wa
               lifespan[1]=lifespan[1]-x ;
               break;
             }
-            */
+            
         if (LogSwitch.Dialogs != false) {
           let dialog = "";
           for (let companion = 0; companion < Creature.length; companion++) {
@@ -1074,7 +1105,7 @@ ${parent[1]}: - I love you too! `*/
 
       // ! 17. talk()
       function talk() {
-        return " бла-бла  Ж:-O"; // bla-bla
+        return " Поболтаем?  Ж:-O"; // bla-bla
       }
       // ! 18. smile()
       function smile() {
@@ -1082,7 +1113,7 @@ ${parent[1]}: - I love you too! `*/
       }
       // ! 19. cry()
       function cry() {
-        return " уии-уаа..  Ж:("; // wee-wee
+        return " Ой-ей-ей..  Ж:("; // wee-wee
       }
 
       // ! 20. Aging()   -  growing up being on one year
@@ -1156,7 +1187,6 @@ ${parent[1]}: - I love you too! `*/
             childP.parentNode.removeChild(childP);
               }
             }
-
             }
        
     </script>
@@ -1214,7 +1244,35 @@ ${parent[1]}: - I love you too! `*/
           height: 40px;
           width: 306px;
           font-size: 20px;
+          display: block; /* visible element */
         }
+
+        .button2 {
+                  display: none;
+        }
+        .button3 {
+          background: -moz-linear-gradient(#d0ecf4, #010b0e, #d0ecf4);
+          background: -webkit-gradient(
+            linear,
+            0 0,
+            0 100%,
+            from(#d0ecf4),
+            to(#a0daac),
+            color-stop(0.5, #6dd684)
+          );
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+          padding: 3px 7px;
+          color: #333;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          border-radius: 50px;
+          border: 1px solid #666;
+          height: 40px;
+          width: 300px;
+          font-size: 18px;
+          display: block; /* visible element */
+        }
+
         .boom {
           padding: 15px;
           border: 1px solid #d6e9c6;
@@ -1281,7 +1339,8 @@ ${parent[1]}: - I love you too! `*/
       </style>
 
       <div class="div1">
-        
+        <button id="26" class ="button2" name="ReloadPage" onclick ="reload2()">Перезагрузить зверинец?</button>
+
         <label><b>СУЩЕСТВ В НАЧАЛЕ</b></label><br />
         <input
           id="3"
@@ -1291,7 +1350,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="12"
-        /><label width="80px"> <b>Деревянных</b> /женс</label>
+        /><label width="80px"> <b>Деревянных</b> /жен</label>
         <input
           id="4"
           class="right"
@@ -1310,7 +1369,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="12"
-        /><label> <b>Стальных</b> / женск </label>
+        /><label> <b>Стальных</b> / женс</label>
         <input
           id="6"
           class="right"
@@ -1349,7 +1408,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="4"
-        /><label> <b>Ледяных</b> /женских</label>
+        /><label> <b>Ледяных</b> /женски</label>
         <input
           id="10"
           class="right"
@@ -1387,7 +1446,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="4"
-        /><label> <b>Пар</b>ообразных/жен</label>
+        /><label> <b>Пар</b>ообразных/ж</label>
         <input
           id="14"
           class="right"
@@ -1406,9 +1465,9 @@ ${parent[1]}: - I love you too! `*/
         type="number"
         min="0"
         max="999"
-        value="0.0005"
+        value="0.03"
       />
-      <label> <b>Скорость</b>, лет за минуту </label><br />
+      <label> Скорость, лет за минуту </label><br />
       <input
         id="1"
         class="center"
@@ -1416,8 +1475,8 @@ ${parent[1]}: - I love you too! `*/
         type="number"
         min="0"
         max="999"
-        value="1000"
-      /><label> <b>Жизнь зверинца</b>, минут</label><br />
+        value="15"
+      /><label> Жизнь зверинца, минут</label><br />
       <input
         id="2"
         class="center"
@@ -1425,9 +1484,9 @@ ${parent[1]}: - I love you too! `*/
         type="number"
         min="0"
         max="999"
-        value="3"
-      /><label> <b>Срок жизни</b> существ, лет</label><br />
-      <label> <b>Настроение</b> ></label>
+        value="10"
+      /><label> Срок жизни существ, лет</label><br />
+      <label> Настрой:) </label>
       <label> +</label>
       <input
         id="24"
@@ -1436,6 +1495,7 @@ ${parent[1]}: - I love you too! `*/
         type="number"
         min="0"
         max="9"
+        step="0.1"
         value="0.5"
       /><label> - </label><input
       id="25"
@@ -1444,6 +1504,7 @@ ${parent[1]}: - I love you too! `*/
       type="number"
       min="0"
       max="9"
+      step="0.1"
       value="0.8"
     /><label> лет</label><br />
       </div>
@@ -1517,14 +1578,22 @@ ${parent[1]}: - I love you too! `*/
         class="button1"
         onclick="
 timerOfWarld(
-      document.getElementsByName('cycleTimeMinutes')[0].value , document.getElementsByName('lifeTimeMenagerieMinutes')[0].value,
-      document.getElementsByName('lifespanCreature')[0].value,  document.getElementsByName('Woods')[0].value,
-      document.getElementsByName('WoodFem')[0].value,  document.getElementsByName('Steels')[0].value,
-      document.getElementsByName('SteelFem')[0].value,  document.getElementsByName('Spirits')[0].value,
-      document.getElementsByName('SpiritFem')[0].value,  document.getElementsByName('WaterIce')[0].value,
-      document.getElementsByName('WaterIceFem')[0].value, document.getElementsByName('WaterLiquid')[0].value,
-      document.getElementsByName('WaterLiquidFem')[0].value, document.getElementsByName('WaterSream')[0].value,
-      document.getElementsByName('WaterSreamFem')[0].value, document.getElementById(`16`).checked,
+      document.getElementsByName('cycleTimeMinutes')[0].value , 
+      document.getElementsByName('lifeTimeMenagerieMinutes')[0].value,
+      document.getElementsByName('lifespanCreature')[0].value,  
+      document.getElementsByName('Woods')[0].value,
+      document.getElementsByName('WoodFem')[0].value,  
+      document.getElementsByName('Steels')[0].value,
+      document.getElementsByName('SteelFem')[0].value,  
+      document.getElementsByName('Spirits')[0].value,
+      document.getElementsByName('SpiritFem')[0].value,  
+      document.getElementsByName('WaterIce')[0].value,
+      document.getElementsByName('WaterIceFem')[0].value, 
+      document.getElementsByName('WaterLiquid')[0].value,
+      document.getElementsByName('WaterLiquidFem')[0].value, 
+      document.getElementsByName('WaterSream')[0].value,
+      document.getElementsByName('WaterSreamFem')[0].value, 
+      document.getElementById(`16`).checked,
       document.getElementById(`17`).checked,document.getElementById(`18`).checked,
       document.getElementById(`19`).checked,document.getElementById(`20`).checked,
       document.getElementById(`21`).checked,document.getElementById(`22`).checked,

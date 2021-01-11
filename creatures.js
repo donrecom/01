@@ -46,6 +46,7 @@ function timerOfWarld(cycleTimeMinutes, lifeTimeMenagerieMinutes,lifespanCreatur
   Generation,statisticForYear,  StatEvery5genOrZeroing, ParametersNewCreature,
   Dialogs, typeWhoBorn, detaleWhoBorn,typeWhoDiedAge)
    {
+    
     /**  ! 1. initial Data                 
       count of  1.cycleTimeMinutes (if "0" -> without delay) 2.lifeTimeMenagerieMinutes)  3.lifespanCreature
       CreaturesType: Woods, WoodFem, Steels, SteelFem, Spirits, SpiritFem

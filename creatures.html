@@ -48,7 +48,10 @@
 При знакомстве одновидовых гетеросексуальных существ, достигших 3-х летнего возраста (совершеннолетия), у них рождается «ребенок».`,
 `В той же ситуации, но тип одного - Дух, другой - Водяной пар - с вероятностью 50/50 рождается Дух или Вода.
 В лог выводится статистика по численности населения в текущем году, диалоги общения встретившихся существ, их настроения, рождения и смерти.
-При при клике по любому месту браузера, вывод лога в браузер приостанавливается до следующего клика, но "жизнь" зверинца продолжается и может просматриваться в консоли.`]
+При при клике по любому месту браузера, вывод лога в браузер приостанавливается до следующего клика, но "жизнь" зверинца продолжается и может просматриваться в консоли.`,
+`Клик по экрану приостанавливает вывод истории в браузер, хотя жизнь зверинца продолжается, повторный клик возобновляет вывод. 
+Двойной клик - Конец света, финал мира существ! Насладитесь потопом и можете ,подредактировав параметры мира, ререзапустить его! 
+Вперед, Творец ! :)`]
 
 /*
     About program:
@@ -94,37 +97,38 @@ When you click on any place in the browser, the output of the log to the browser
       var labelZeroingType = { wood: 1, steel: 1, spirit: 1, water: 1 }; // array-label for nullified tipes
       var generation = 0; // for 1-st generation
       var id = 0; // counter of creatur
-      var pause_ = 1;
+      var pause_ = 1, TestI=0, stat1=0, stat2=0;
       var stop1=0; // global timer marker for menagerie life cycles
+      
 //}
       // ! 3. timerOfWarld()
-      function timerOfWarld(
-        cycleTimeMinutes,
-        lifeTimeMenagerieMinutes,
-        lifespanCreature,
-        Woods,
-        WoodFem,
-        Steels,
-        SteelFem,
-        Spirits,
-        SpiritFem,
-        WaterIce,
-        WaterIceFem,
-        WaterLiquid,
-        WaterLiquidFem,
-        WaterSream,
-        WaterSreamFem,
-        Generation,
-        statisticForYear,
-        StatEvery5genOrZeroing,
-        ParametersNewCreature,
-        Dialogs,
-        typeWhoBorn,
-        detaleWhoBorn,
-        typeWhoDiedAge,
-        plusMood,
-        minusMood
-      ) {
+      function timerOfWarld() {
+     cycleTimeMinutes =document.getElementsByName('cycleTimeMinutes')[0].value , 
+     lifeTimeMenagerieMinutes =document.getElementsByName('lifeTimeMenagerieMinutes')[0].value,
+     lifespanCreature =document.getElementsByName('lifespanCreature')[0].value,  
+     Woods =document.getElementsByName('Woods')[0].value,
+     WoodFem =document.getElementsByName('WoodFem')[0].value,  
+     Steels =document.getElementsByName('Steels')[0].value,
+     SteelFem =document.getElementsByName('SteelFem')[0].value,  
+     Spirits =document.getElementsByName('Spirits')[0].value,
+     SpiritFem =document.getElementsByName('SpiritFem')[0].value,  
+     WaterIce =document.getElementsByName('WaterIce')[0].value,
+     WaterIceFem =document.getElementsByName('WaterIceFem')[0].value, 
+     WaterLiquid =document.getElementsByName('WaterLiquid')[0].value,
+     WaterLiquidFem =document.getElementsByName('WaterLiquidFem')[0].value, 
+     WaterSream =document.getElementsByName('WaterSream')[0].value,
+     WaterSreamFem =document.getElementsByName('WaterSreamFem')[0].value, 
+     Generation  =document.getElementById(`16`).checked,
+     statisticForYear  =document.getElementById(`17`).checked,
+     ParametersNewCreature  =document.getElementById(`19`).checked,
+     Dialogs  =document.getElementById(`20`).checked,
+     typeWhoBorn  =document.getElementById(`21`).checked,
+     detaleWhoBorn  =document.getElementById(`22`).checked,
+     typeWhoDiedAge  =document.getElementById(`23`).checked,
+     plusMood  =document.getElementsByName('plusMood')[0].value,
+     minusMood  =document.getElementsByName('minusMood')[0].value,
+     Test1000 =document.getElementById(`18`).checked,
+     countTest  =document.getElementsByName('countTest')[0].value
         /**  ! 1. initial Data                 
       count of  1.cycleTimeMinutes (if "0" -> without delay) 2.lifeTimeMenagerieMinutes)  3.lifespanCreature
       CreaturesType: Woods, WoodFem, Steels, SteelFem, Spirits, SpiritFem
@@ -145,12 +149,13 @@ When you click on any place in the browser, the output of the log to the browser
         LogSwitch = {
           Generation: Generation,
           statisticForYear: statisticForYear,
-          StatEvery5genOrZeroing: StatEvery5genOrZeroing,
           ParametersNewCreature: ParametersNewCreature,
           Dialogs: Dialogs,
           typeWhoBorn: typeWhoBorn,
           detaleWhoBorn: detaleWhoBorn,
           typeWhoDiedAge: typeWhoDiedAge,
+          Test1000: Test1000,
+          countTest:countTest
         };
         InstalCreaturesData = {
           cycleTimeMinutes: cycleTimeMinutes,
@@ -184,11 +189,23 @@ When you click on any place in the browser, the output of the log to the browser
           newYear(InstalCreaturesData);
           if (stop1==1||allCreatures.length <= 0) {
             let extinction;
-             if (stop1==1){extinction = " !!! Конец Света по воле Твоей !"}else 
+             if (stop1==1){extinction = "!! Конец Света по воле Твоей!"}else 
              {extinction =" !!! Произошло вымирание цивилизации !" };
             Log(extinction, "extinction");// " !!! There was an extinction of civilization !"
             clearInterval(timer);
             reload1();
+            // test mode 1000 attempts to survive the menagerie with the current parameters
+            if (LogSwitch.Test1000==true&&TestI<LogSwitch.countTest&&allCreatures.length <= 1000&&stop1!=1){ 
+              // fix the maximum number of years of the existence of a civilization
+              if(stat2<generation)stat2=generation; 
+              TestI++;
+              reload2();
+              timerOfWarld()
+            } else {   
+              if(LogSwitch.Test1000==true){extinction=`, ${TestI} циклов теста`}else{extinction=``};
+              Log(`Мах: ${stat1} существ, ${stat2} лет существования цивилизации${extinction}`, "extinction");
+              TestI=0; stat1=0;stat2=0;
+            }
           // process.exit(0);
           };
         }, InstalCreaturesData.cycleTimeMinutes * 60 * 1000); // repeat newYear after "cycleTime" minutes
@@ -259,9 +276,15 @@ stop1=0;
         } else {
           Life(); // todo>        if it's not the first time --> Look 8.Life()
         }
+        if(stat1<allCreatures.length)stat1=allCreatures.length;// fix the maximum number creatures per year
+        
         if (LogSwitch.statisticForYear != false) statistic();
         //elseif (LogSwitch.Generation != 0) Log("Generation " + generation);
         // Show current number Generation (cycle,year) , statistics / if LogSwitch!=0
+        if (allCreatures.length>=1000&&Test1000==true) {
+          Log(`Количество существ достигло ${allCreatures.length} на ${generation}-м году на ${TestI+1}-м цикле теста`, "stat" );
+        stop1=1;
+      }
         generation++;
       }
 
@@ -403,15 +426,7 @@ stop1=0;
             labelZeroingType.water = 0;
             doStat = 1;
           }
-
-          if (LogSwitch.StatEvery5genOrZeroing != false) {
-            // --> Write statistic every 5-th generation & statistic when zeroing amount of any type of creatures
-            if (generation % 5 == 0 || doStat == 1) logstat(statistic);
-          } else {
-            // otherwise --> Write all statistics every time.
-            logstat(statistic);
-          }
-          // todo>    Result print to console --> Look 6.logstat(s)
+logstat(statistic);  // todo>    Result print to console --> Look 6.logstat(s)
         }
       }
 
@@ -1189,6 +1204,15 @@ ${parent[1]}: - I love you too! `*/
             }
             }
        
+        function fTest(checked){
+          Generation  =document.getElementById(`16`).checked=checked;
+          statisticForYear  =document.getElementById(`17`).checked=checked;
+          ParametersNewCreature =document.getElementById(`19`).checked=checked;
+          Dialogs  =document.getElementById(`20`).checked=checked;
+          typeWhoBorn  =document.getElementById(`21`).checked=checked;
+          detaleWhoBorn  =document.getElementById(`22`).checked=checked;
+          typeWhoDiedAge  =document.getElementById(`23`).checked=checked;
+        }
     </script>
 
     <form>
@@ -1350,7 +1374,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="12"
-        /><label width="80px"> <b>Деревянных</b> /жен</label>
+        /><label width="80px"> <b>Древесных</b> /жен</label>
         <input
           id="4"
           class="right"
@@ -1369,7 +1393,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="12"
-        /><label> <b>Стальных</b> / женс</label>
+        /><label> <b>Стальных</b> /жен</label>
         <input
           id="6"
           class="right"
@@ -1388,7 +1412,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="12"
-        /><label> <b>Духовных</b> /  женск</label>
+        /><label> <b>Духов</b> / женских</label>
         <input
           id="8"
           class="right"
@@ -1398,8 +1422,8 @@ ${parent[1]}: - I love you too! `*/
           max="999"
           value="6"
         /><label></label><br />
-        <br />
-        <label>Существ из рода <b>Вода</b> :</label><br />
+        
+        <label><b>Водяных</b></label><br />
         <input
           id="9"
           class="center"
@@ -1408,7 +1432,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="4"
-        /><label> <b>Ледяных</b> /женски</label>
+        /><label> <b>Ледяных</b> /женск</label>
         <input
           id="10"
           class="right"
@@ -1427,7 +1451,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="4"
-        /><label> <b>Жидких</b>  / женских</label>
+        /><label> <b>Жидких</b> /женск</label>
         <input
           id="12"
           class="right"
@@ -1446,7 +1470,7 @@ ${parent[1]}: - I love you too! `*/
           min="0"
           max="999"
           value="4"
-        /><label> <b>Пар</b>ообразных/ж</label>
+        /><label> <b>Пар</b>ящих/женск</label>
         <input
           id="14"
           class="right"
@@ -1456,7 +1480,7 @@ ${parent[1]}: - I love you too! `*/
           max="999"
           value="2"
         /><label></label><br />
-        <br /><label><b>Параметры зверинца</b></label><br />
+        <label><b>ПАРАМЕТРЫ ЗВЕРИНЦА</b></label><br />
 
         <input
         id="0"
@@ -1465,9 +1489,9 @@ ${parent[1]}: - I love you too! `*/
         type="number"
         min="0"
         max="999"
-        value="0.03"
+        value="0.00003"
       />
-      <label> Скорость, лет за минуту </label><br />
+      <label> лет в минуту </label><br />
       <input
         id="1"
         class="center"
@@ -1476,7 +1500,7 @@ ${parent[1]}: - I love you too! `*/
         min="0"
         max="999"
         value="15"
-      /><label> Жизнь зверинца, минут</label><br />
+      /><label> минут - жизнь зверинца</label><br />
       <input
         id="2"
         class="center"
@@ -1484,8 +1508,8 @@ ${parent[1]}: - I love you too! `*/
         type="number"
         min="0"
         max="999"
-        value="10"
-      /><label> Срок жизни существ, лет</label><br />
+        value="9"
+      /><label> лет-среднее долголетие</label><br />
       <label> Настрой:) </label>
       <label> +</label>
       <input
@@ -1496,7 +1520,7 @@ ${parent[1]}: - I love you too! `*/
         min="0"
         max="9"
         step="0.1"
-        value="0.5"
+        value="0.0"
       /><label> - </label><input
       id="25"
       class="center"
@@ -1516,57 +1540,73 @@ ${parent[1]}: - I love you too! `*/
           class="center"
           name="Generation"
           type="checkbox"
-          checked="checked"
+        
         /><label> Показать год (цикл)</label><br />
         <input
           id="17"
           class="center"
           name="statisticForYear"
           type="checkbox"
-          checked="checked"
+          
         /><label> Годовая статистика</label><br />
-        <input
-          id="18"
-          class="center"
-          name="StatEvery5genOrZeroing"
-          type="checkbox"
-        /><label> статистика раз в 5 циклов</label><br />
         <input
           id="19"
           class="center"
           name="ParametersNewCreature"
           type="checkbox"
-          checked="checked"
+          
         /><label> парам.нов.существ</label><br />
         <input
           id="20"
           class="center"
           name="Dialogs"
           type="checkbox"
-          checked="checked"
+          
         /><label> диалоги</label><br />
         <input
           id="21"
           class="center"
           name="typeWhoBorn"
           type="checkbox"
-          checked="checked"
+          
         /><label> тип рожденных</label><br />
         <input
           id="22"
           class="center"
           name="detaleWhoBorn"
           type="checkbox"
-          checked="checked"
+          
         /><label> подробнее о рожденных</label><br />
         <input
           id="23"
           class="center"
           name="typeWhoDiedAge"
           type="checkbox"
-          checked="checked"
+          
         /><label> умершие</label><br />
-      </div>
+        </div>
+      <div>
+        <input
+        id="18"
+        class="center"
+        name="Test1000"
+        type="checkbox"
+        checked="checked"
+        onchange="fTest(!checked)"
+      /><label><b>Тест границы</b></label>
+      <input 
+          id="6"
+          class="left"
+          name="countTest"
+          type="number"
+          min="10"
+          max="9999"
+          step="100"
+          value="1000"
+        /><label> раз</label>
+
+      <br />
+    </div>
     </form>
 
     <div id="divDialog">
@@ -1574,34 +1614,7 @@ ${parent[1]}: - I love you too! `*/
         class="button1"
         onclick="about.forEach(function(a){alert(a)});"
       >О программе</button>
-      <button
-        class="button1"
-        onclick="
-timerOfWarld(
-      document.getElementsByName('cycleTimeMinutes')[0].value , 
-      document.getElementsByName('lifeTimeMenagerieMinutes')[0].value,
-      document.getElementsByName('lifespanCreature')[0].value,  
-      document.getElementsByName('Woods')[0].value,
-      document.getElementsByName('WoodFem')[0].value,  
-      document.getElementsByName('Steels')[0].value,
-      document.getElementsByName('SteelFem')[0].value,  
-      document.getElementsByName('Spirits')[0].value,
-      document.getElementsByName('SpiritFem')[0].value,  
-      document.getElementsByName('WaterIce')[0].value,
-      document.getElementsByName('WaterIceFem')[0].value, 
-      document.getElementsByName('WaterLiquid')[0].value,
-      document.getElementsByName('WaterLiquidFem')[0].value, 
-      document.getElementsByName('WaterSream')[0].value,
-      document.getElementsByName('WaterSreamFem')[0].value, 
-      document.getElementById(`16`).checked,
-      document.getElementById(`17`).checked,document.getElementById(`18`).checked,
-      document.getElementById(`19`).checked,document.getElementById(`20`).checked,
-      document.getElementById(`21`).checked,document.getElementById(`22`).checked,
-      document.getElementById(`23`).checked,
-      document.getElementsByName('plusMood')[0].value,
-      document.getElementsByName('minusMood')[0].value
-)"
-      >
+      <button id="PuskID" class="button1" onclick="timerOfWarld()">
         Пуск !
       </button>
     </div>

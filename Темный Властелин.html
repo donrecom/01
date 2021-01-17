@@ -59,7 +59,7 @@
           border-radius: 5px;
           border: 1px solid #666;
           height: 40px;
-          width: 270px;
+          width: 315px;
           font-size: 20px;
           display: block; /* visible element */
         }
@@ -84,10 +84,10 @@
           -webkit-border-radius: 5px;
           border-radius: 50px;
           border: 1px solid #666;
-          height: 40px;
-          width: 300px;
+          height: 80px;
+          width: 130px;
           font-size: 18px;
-          display: block; /* visible element */
+         /* display: block; /* visible element */
         }
 
         #s1 {
@@ -146,63 +146,113 @@
         #s8 {
           padding: 15px;
           border: 1px solid #d6e9c6;
-          border-radius: 20% 0;
-          color: #08095e;
-          background: rgba(28, 238, 0, 0.459);
+          border-radius: 30px;
+          color: #e5ebe5;
+          background-color: #0f0338;
+          font-size: 22px;
         }
       </style>
       <div> <!--class="div1"-->
         <p id="s2">Игра <b>ТЕМНЫЙ ВЛАСТЕЛИН</b></p>
-        <input
-          id="s2"
-          class="center"
-          name="Woods"
-          type="submit"
-          value="12"
-          onclick ="reload1()"
-        />
-        <button id="timer" class ="button3" name="timer" >ТАЙМЕР</button>
-        <p id="s2">Вы "Темный Властелин".<br/>1.____Нажмите:______________
-          <button id="rules" class ="button1" name="rules" onclick ="reload1()" >ГЕНЕРАТОР ОБРАЗА</button></p>
-          <p id="s4" name="character"><b>__________________</b><br /></p>
+        <p id="s2">1. Вы "Темный Властелин". кликните генератор образа</p>
+          <button id="rules" type="button"  class ="button1" name="rules" onclick ="reload1()" >ГЕНЕРАТОР ОБРАЗА</button>
+          <p id="s3" name="character"><b>__________________</b><br /></p>
         <p id="s2">Прочтите просебя вариант.
         <br /><b>Не говорите остальным кто вы.</b>
-        <br /><br />Их задача понять какой вы "Властелин", каких ценностей придерживаетесь, и в чем их обвиняете, чтобы оправдаться и избежать собственной казни.
-        <p id="s3">2.___Придумайте_____ ситуацию, проблему, форсмажор, повод для поиска ВИНОВНИКА</p>
+        <br /><br />Зададача остальных участников понять какой вы "Властелин", каких ценностей придерживаетесь, в чем обвиняете, оправдаться и избежать казни.
+        <p id="s8">2.___Придумайте_____ ситуацию, проблему, форсмажор, повод для поиска ВИНОВНИКА.<br /><br />Придумайте ясное потрясающее или смутное завуалированное обвинение.</p>
         <p id="s2"><b>НАЧНЕМ!</b><br /></p>
           <p id="s7">Властилин говорит:</p>
       <p id="s1">"Вы все провинились...!"<br />"Случилось непоправимое..."<br />"Я обнаружил(а) такое!..."</p> 
       <p id="s7">Завершающая фраза Властелина:</p>
         <p id="s1"> "А больше всего в этом виноват(а) Ты!"</p> 
-        <p id="s2">Импровизируйте! Придумайте ясное потрясающее или смутное завуалированное обвинение.
-        <br /><br />Обращаясь к любому следующему игроку, можно придумать на лету роль.
+        <p id="s2">Импровизируйте! Обращаясь к любому следующему игроку, можно предложить сходу ему роль.
         <br /><br />Игрок и сам себе может придумать роль во время оправдательной речи.
       </p>
-        <p id="s2">Задача игрока на которого указал Темный Властелин логично и интересно объяснить, почему он не виноват и почему виноват другой, на которого тут же и укажет (можно предложить тем самым новую придуманную роль для следующего игрока).
+        <p id="s2">Задача игрока на которого указал Темный Властелин логично и интересно объяснить, почему он не виноват и почему виноват другой, на которого и указывает, зачастую назвая (предлагая) роль следующему.
         </p>
-        <p id="s2">Можно использовать таймер, чтобы игрок мог говорить дольше 15 сек, но не больше 2х минут.
-        <br /><br />Задача следующего игрока аналогична задаче предыдущего: соблюдая логику всего что было описано ранее, объяснить "почему виноват не я, а следующий"
+        <p id="s2">Каждая речь от 15 сек до 2х минут. Можно использовать таймер.
+          <button id="timer" class ="button3" name="timer" type="button" onclick ="timer0()" >ТАЙМЕР</button>
+          <input
+          id="s3"
+          class="center"
+          name="timer10"
+          type="time"
+          value="02:00"
+          onclick ="timer0()"
+          /> 
+          <p id="timer1">---</p>
+          <br /><br />Задача следующего игрока аналогична задаче предыдущего: соблюдая логику всего что было описано ранее, объяснить "почему виноват не я, а следующий"
         <br /><br />Все отмазываются, переводят стрелки на другого, удерживая всю растущую историю в уме.
       </p>
         <p id="s2">Темный Властилин "казнит", бросает плюшевый томагавк того кто не смог отмазаться, или был не убедителен.
         <br /><br />Затем выбирается новый Темный Властелин, генерируем новый образ, и так далее.
         </p><br />
 
-         
-                <p id="txt1"></p>
-                <script>
-                document.getElementById('txt1').innerHTML="<b>js.blox.ua</b> - java script  html";
-             </script>
-        
-        
-
-
         <script>
 function reload1(){
-        var b=document.getElementsByTagName("p")[2].innerHTML ="button3" ;
-       
-          
+        let character0=['Саурон','Дарт Вейдер','Джеймс Бонд','Терминатор','Робин Гуд','Хиппи','Ленин', 'Белочка', 'Хипстер','Зомби','Театральная прима','Гарри Поттер',
+      'Иванушка дурачок'];
+       let txt=character0[Math.ceil(Math.random() * character0.length -1)];
+        var b=document.getElementsByTagName("p")[2].innerHTML =txt ;
       }
+//alert("Время вышло");
+
+  function timer0() {
+//Секундомер
+//изначальные переменные
+min = 0;
+hour = 0;
+//Оставляем вашу функцию
+function init() {
+    sec = 0;
+    setInterval(tick, 1000);
+}
+
+//Основная функция tick()
+function tick() {
+    sec++;
+    if (sec >= 60) { //задаем числовые параметры, меняющиеся по ходу работы программы
+        min++;
+        sec = sec - 60;
+    }
+    if (min >= 60) {
+        hour++;
+        min = min - 60;
+    }
+    if (sec < 10) { //Визуальное оформление
+        if (min < 10) {
+            if (hour < 10) {
+                document.getElementById('timer1').innerHTML ='0' + hour + ':0' + min + ':0' + sec;
+            } else {
+                document.getElementById('timer1').innerHTML = hour + ':0' + min + ':0' + sec;
+            }
+        } else {
+            if (hour < 10) {
+                document.getElementById('timer1').innerHTML = '0' + hour + ':' + min + ':0' + sec;
+            } else {
+                document.getElementById('timer1').innerHTML = hour + ':' + min + ':0' + sec;
+            }
+        }
+    } else {
+        if (min < 10) {
+            if (hour < 10) {
+                document.getElementById('timer1').innerHTML = '0' + hour + ':0' + min + ':' + sec;
+            } else {
+                document.getElementById('timer1').innerHTML = hour + ':0' + min + ':' + sec;
+            }
+        } else {
+            if (hour < 10) {
+                document.getElementById('timer1').innerHTML = '0' + hour + ':' + min + ':' + sec;
+            } else {
+                document.getElementById('timer1').innerHTML = hour + ':' + min + ':' + sec;
+            }
+        }
+    }
+}
+    
+  }
+      
 
         </script>
   </body>

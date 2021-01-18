@@ -99,19 +99,19 @@ function timerOfWarld(cycleTimeMinutes, lifeTimeMenagerieMinutes,lifespanCreatur
   let extinction = " !!! Произошло вымирание цивилизации !"; // " !!! There was an extinction of civilization !"
 
   //  turn on the cycle timer
-  let timer = setInterval(() => {
-    newYear(InstalCreaturesData);
-    if (allCreatures.length <= 0) {
-      Log(extinction,"extinction");
-      clearInterval(timer);
-      process.exit(0);
-    }
-  }, InstalCreaturesData.cycleTimeMinutes * 60 * 1000); // repeat newYear after "cycleTime" minutes
+  let timer = setInterval(function () {
+      newYear(InstalCreaturesData);
+      if (allCreatures.length <= 0) {
+        Log(extinction, "extinction");
+        clearInterval(timer);
+        process.exit(0);
+      }
+    }, InstalCreaturesData.cycleTimeMinutes * 60 * 1000); // repeat newYear after "cycleTime" minutes
 
-  setTimeout(() => {
-    clearInterval(timer); // and set the End of the World
-    Log(`Время цивилизации существ вышло ! (${InstalCreaturesData.lifeTimeMenagerieMinutes} мин)`,"extinction"); // "End of the Warld !"
-  },  InstalCreaturesData.lifeTimeMenagerieMinutes* 60 * 1000); // lifeTimeMenagerie (minutes) - when to stop output
+  setTimeout(function () {
+      clearInterval(timer); // and set the End of the World
+      Log(`Время цивилизации существ вышло ! (${InstalCreaturesData.lifeTimeMenagerieMinutes} мин)`, "extinction"); // "End of the Warld !"
+    },  InstalCreaturesData.lifeTimeMenagerieMinutes* 60 * 1000); // lifeTimeMenagerie (minutes) - when to stop output
 }
 
 // ! 3.1 пишем лог

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" /> <!--lang--> 
+    <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    /><!--scale-->
+    <title>Темный Властелин</title>
+  </head>
+  <body class="background1">
+     <form>
+      <style type="text/css">
+         .background1 {
+          background: #599ac0;
+          background-image: url("");
+          /* Background color and file path */
+          -moz-background-size: 100%; /* Firefox 3.6+ */
+          -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+          -o-background-size: 100%; /* Opera 9.6+ */
+          background-size: 100%; /* Modern browsers */
+          color: rgb(0, 0, 0); /* Text color */
+          font-style: oblique;
+          font-size: 18px;
+          max-width: 320px;
+        }
+        .div1 {
+          border: 1px solid rgb(122, 146, 226); /* Параметры рамки */
+          padding: 5px; /* Поля вокруг текста */
+          margin-bottom: 5px; /* Отступ снизу */
+        }
+        #left {
+          text-align: left;
+        }
+        .center {
+          text-align: center;
+        }
+
+       .right{ display: block;
+  float: right;
+  width: 70px;
+  height: 15px;}
+
+        .button1 {
+          background: -moz-linear-gradient(#d0ecf4, #010b0e, #d0ecf4);
+          background: -webkit-gradient(
+            linear,
+            0 0,
+            0 100%,
+            from(#d0ecf4),
+            to(#d0ecf4),
+            color-stop(0.5, #5bc9e1)
+          );
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+          padding: 3px 7px;
+          color: #333;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          border-radius: 5px;
+          border: 1px solid #666;
+          height: 40px;
+          width: 315px;
+          font-size: 20px;
+          display: block; /* visible element */
+        }
+
+        .button2 {
+                  display: none;
+        }
+        .button3 {
+          background: -moz-linear-gradient(#d0ecf4, #010b0e, #d0ecf4);
+          background: -webkit-gradient(
+            linear,
+            0 0,
+            0 100%,
+            from(#d0ecf4),
+            to(#a0daac),
+            color-stop(0.5, #6dd684)
+          );
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+          padding: 3px 7px;
+          color: #333;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          border-radius: 50px;
+          border: 1px solid #666;
+          height: 80px;
+          width: 130px;
+          font-size: 18px;
+         /* display: block; /* visible element */
+        }
+
+        #s1 {
+          padding: 15px;
+          border: 3px solid #e9a932;
+          border-radius: 30px;
+          color: #ffffff;
+          background-color: #ce3e3e;
+        }
+        #s2 {
+          padding: 15px;
+          border: 1px solid #d6e9c6;
+          border-radius: 30px;
+          color: #e5ebe5;
+          background-color: #362d5a;
+        }
+        #s3 {
+          padding: 20px;
+          border: 4px solid #ffffff;
+          border-radius: 30px;
+          color: #aadbd9;
+          background-color: #160e36;
+          font-size: 22px;
+        }
+        #s4 {
+          padding: 15px;
+          border: 1px solid #c4a51c;
+          border-radius: 10px;
+          color: #080e08;
+          background: rgba(238, 241, 62, 0.767);
+        }
+        #s5 {
+          padding: 15px;
+          border: 1px solid #d6e9c6;
+          border-radius: 50% 90% / 10% 0%;
+          color: #ececec;
+          background: rgba(0, 171, 238, 0.431);
+          background-color: #f08fb7;
+        }
+
+        #s6 {
+          padding: 15px;
+          border: 1px solid #d6e9c6;
+          border-radius: 10% / 55%;
+          color: #e5ebe5;
+          background: rgba(47, 47, 47, 0.363);
+        }
+
+        #s7 {
+          padding: 15px;
+          border: 1px solid #d6e9c6;
+          border-radius: 50% 90% / 10% 0%;
+          color: #000000;
+          background: rgba(0, 171, 238, 0.363);
+        }
+        #s8 {
+          padding: 15px;
+          border: 1px solid #d6e9c6;
+          border-radius: 30px;
+          color: #e5ebe5;
+          background-color: #0f0338;
+          font-size: 22px;
+        }
+      </style>
+      <div> <!--class="div1"-->
+        <p id="s2">Игра <b>ТЕМНЫЙ ВЛАСТЕЛИН</b></p>
+        <p id="s8">1. Вы "Темный Властелин". кликните генератор образа</p>
+          <button id="rules" type="button"  class ="button1" name="rules" onclick ="reload1()" >ГЕНЕРАТОР ОБРАЗА</button>
+          <p id="s3" name="character"><b>__________________</b><br /></p>
+        <p id="s2">Не говорите остальным какой вы персонаж.</b></p>
+        <p id="s8">2. Придумайте обвинение, ситуацию, проблему, форсмажор, повод для поиска ВИНОВНИКА</p>
+        <p id="s8">3. Зададача остальных участников понять какой вы "Властелин", оправдаться и избежать казни.</p>
+        <p id="s2"><b>НАЧНЕМ!</b><br /></p>
+          <p id="s7">Властилин, Вы можете сказать из своей роли от первого лица:</p>
+      <p id="s1">"Вы все провинились...!"<br />"Случилось непоправимое..."<br />"Я обнаружил(а) такое!..."</p> 
+      <p id="s7">Вы завершаете фразой:</p>
+        <p id="s1"> "А больше всего в этом виноват(а) Ты , (Казначей)!" (показывает на любого)</p> 
+        <p id="s7">Тот на кого Вы указали должен из придуманной или указанной роли оправдаться и перевести стрелку на следующего</p>
+        <p id="s1"> "Я, как Казначей, совершенно не виноват ...далее следует оправда- тельная речь... поэтому, видите - виноват не я, а (Поп)!" (показывает на любого)</p>
+        <p id="s7">Затем говорит и обвиняет следующий, затем следующий, и так по кругу в произвольном порядке</p>
+        <button id="timer" class ="button3" name="timer" type="button" onclick ="timer0()" >ТАЙМЕР</button>
+        <span id="s3" name="tablo">0:00</span>
+        <p id="s2">Импровизируйте! Обращаясь к любому игроку, можно сходу назначить ему роль.
+        Каждый может придумать себе роль во время оправдательной речи.
+      </p>
+        <p id="s2">Задача игрока на которого указал Темный Властелин логично и интересно объяснить, почему он не виноват и почему виноват другой, на которого и указывает, зачастую назвая (предлагая) роль следующему.
+        </p>
+        <p id="s2">Каждая речь от 15 сек до 2х минут. Можно использовать таймер.</p>
+          <p id="s2">Задача следующего игрока аналогична задаче предыдущего: соблюдая логику всего что было описано ранее, объяснить "почему виноват не я, а следующий"
+        <br /><br />Все оправдываются, переводят стрелки на другого, удерживая всю растущую историю в уме.
+      </p>
+        <p id="s2">Темный Властилин "казнит", бросает плюшевый томагавк того кто не смог оправдаться, не был убедителен или слишком затянул с ответом (молчал более 15сек) или мало говорил (менее минуты).
+        <br /><br />Затем выбирается новый Темный Властелин, генерируем новый образ, и играем снова!
+        </p><br />
+
+        <script>
+
+function reload1(){
+        let character0=['Саурон','Дарт Вейдер','Джеймс Бонд','Терминатор','Робин Гуд','Хиппи','Ленин', 'Белочка', 'Хипстер','Зомби','Театральная прима','Гарри Поттер',
+      'Иванушка дурачок'];
+       let txt=character0[Math.ceil(Math.random() * character0.length -1)];
+        var b=document.getElementsByTagName("p")[2].innerHTML =txt ;
+      }
+//alert("Время вышло");
+var sec = 0, min = 0, timer33; //Stopwatch initial variables
+
+ function timer0() {
+  var b=document.getElementsByTagName("span")[0].innerText ;
+  if (b=="0:00") {
+    sec = 0;
+    let timer33=setInterval(tick(), 1000);}
+    else {clearInterval(timer33);b=="0:00";sec = 0; min = 0;}
+}
+
+function tick() { //  main function
+    sec++;
+    if (sec >= 60) { 
+        min++;
+        sec = sec - 60;
+    }
+    if (min <=9) {
+        document.getElementsByName("tablo")[0].innerHTML = (sec < 10)? min + ':0' + sec:min + ':' + sec; 
+    } else{
+      clearInterval(timer33);
+      document.getElementsByName("tablo")[0].innerHTML = "9:59";      
+
+    }
+    
+    }
+
+    
+  
+      
+
+        </script>
+  </body>
+</html>
